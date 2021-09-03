@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome Admin</h1>
+        <div id="product_info">
+            <div class="product_details">
+                <span class="input_name">Product Name</span>
+                <input type="text" class="inputs" placeholder="Product Name">
+            </div>
+            <div class="product_details" >
+                <span class="input_name">Product Description</span>
+                <textarea name="" id="" class="inputs" cols="" rows="" placeholder="Product Description"></textarea>
+            </div>
+            <div class="product_details">
+                <span class="input_name">Product Price</span>
+                <input type="number" min="0" class="inputs" placeholder="Product Price">
+            </div>
+            <div class="product_details">
+                <span class="input_name">Product Quantity</span>
+                <input type="number" min="0" class="inputs" placeholder="Product Quantity">
+            </div>
+            <div class="product_details">
+                <span class="input_name">Product Image</span>
+                <button id="choose_file">Choose file</button>
+                <span id="name_of_file">No file chosen</span>
+            </div>
+            <button id="add_product">Add Product</button>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

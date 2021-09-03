@@ -1,0 +1,56 @@
+body{
+    box-sizing: border-box;
+}
+.container{
+    width: 90%;
+    margin: 0% 5%;
+}
+h1{
+    text-align: center;
+}
+#product_info{
+    width: 45%;
+    border: 2px solid lightgray;
+    position: relative;
+    margin: 0% auto;
+    padding: 2% 4%;
+}
+.product_details{
+    margin: 3% 0%;
+    position: relative;
+}
+.input_name{
+    width: 45%;
+    text-align: justify;
+}
+.inputs{
+    width: 40%;
+    height: 75%;
+    position: absolute;
+    right: 5%;
+}
+textarea{
+    resize: vertical;
+    height: 100%;
+    width: 40%;
+}
+#choose_file{
+    position: absolute;
+    left: 40%;
+}
+#name_of_file{
+    display: inline-block;
+    position: absolute;
+    left: 57%;
+    width: 20%;
+    text-align: center;
+}
+#add_product{
+    width: 24%;
+    margin: 3% 38% 0%;
+    height: 2.5em;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 0.35em;
+}
