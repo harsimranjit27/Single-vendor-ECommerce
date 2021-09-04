@@ -12,19 +12,19 @@
         <div id="product_info">
             <div class="product_details">
                 <span class="input_name">Product Name</span>
-                <input type="text" class="inputs" placeholder="Product Name">
+                <input type="text" id="product_name" class="inputs" placeholder="Product Name">
             </div>
             <div class="product_details" >
                 <span class="input_name">Product Description</span>
-                <textarea name="" id="" class="inputs" cols="" rows="" placeholder="Product Description"></textarea>
+                <textarea name="" id="product_description" class="inputs" cols="" rows="" placeholder="Product Description"></textarea>
             </div>
             <div class="product_details">
                 <span class="input_name">Product Price</span>
-                <input type="number" min="0" class="inputs" placeholder="Product Price">
+                <input type="number" min="0" class="inputs" id="product_price" placeholder="Product Price">
             </div>
             <div class="product_details">
                 <span class="input_name">Product Quantity</span>
-                <input type="number" min="0" class="inputs" placeholder="Product Quantity">
+                <input type="number" id="product_quantity" min="0" class="inputs" placeholder="Product Quantity">
             </div>
             <div class="product_details">
                 <span class="input_name">Product Image</span>
@@ -34,7 +34,9 @@
             <button id="add_product">Add Product</button>
         </div>
     </div>
-    
-    <script src="main.js"></script>
+    <div id="product_catalogue_container">
+
+    </div>
+    <script src="admin.js"></script>
 </body>
 </html>
