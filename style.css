@@ -54,3 +54,31 @@ textarea{
     border: none;
     border-radius: 0.35em;
 }
+#product_catalogue_container{
+    display: flex;
+    margin: 5% 5% 0%;
+    /* width: 100vw; */
+}
+.product_catalogue{
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    width: 20vw;
+    height: 10vh;
+    margin: 1%;
+}
+b{
+    display: block;
+    text-align: center;
+}
+p{
+    padding: 0% 5%;
+}
+#price,#quantity{
+    text-align: right;
+    margin-right: 20%;
+}
+.number_tags{
+    float: left;
+    font-weight: bold;
+}
