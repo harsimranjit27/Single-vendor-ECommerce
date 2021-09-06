@@ -22,11 +22,6 @@ function addProductToUI() {
     // console.log(isValid);
     if(isValid.status){
 
-        console.log(product.productName);
-        console.log(product.productDescription);
-        console.log(product.productPrice);
-        console.log(product.productQuantity);
-
         let productCatalogue = document.createElement("div");
         productCatalogue.classList.add("product_catalogue");
         let img = document.createElement("img");
@@ -68,13 +63,20 @@ function addProductToUI() {
 
 function validateInputs(product) {
 
-    let productName = product.productName;
-    let productDescription = product.productDescription;
-    let productPrice = product.productPrice;
-    let productQuantity = product.productQuantity;
-    
+    // let productName = product.productName;
+    // let productDescription = product.productDescription;
+    // let productPrice = product.productPrice;
+    // let productQuantity = product.productQuantity;
 
-    console.log(productName);
+    // ES6 way to get elements from product object
+    let {
+        productName,
+        productPrice,
+        productQuantity,
+        productDescription
+    } = product;
+
+    // console.log(productName);
 
     if (productName === "") {
         return {
