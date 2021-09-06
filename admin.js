@@ -4,57 +4,68 @@ let productPriceNode = document.getElementById("product_price");
 let productQuantityNode = document.getElementById("product_quantity");
 let productImageButton = document.getElementById("choose_file");
 let addProductButton = document.getElementById("add_product");
-
 let productCatalogueContainer = document.getElementById("product_catalogue_container");
 
-addProductButton.addEventListener("click",addProductToUI);
+addProductButton.addEventListener("click",()=>{
 
-function addProductToUI() {
-    
     let product = {
         productName : productNameNode.value,
         productDescription : productDescriptionNode.value,
         productPrice : productPriceNode.value,
         productQuantity : productQuantityNode.value
-    }
+    }    
 
     let isValid = validateInputs(product);
-    // console.log(isValid);
     if(isValid.status){
-
-        let productCatalogue = document.createElement("div");
-        productCatalogue.classList.add("product_catalogue");
-        let img = document.createElement("img");
-
-        let details = document.createElement("div");
-        details.id = "details";
-
-        let name = document.createElement("b");
-        name.innerText = product.productName;
-        details.appendChild(name);
-
-        let description = document.createElement("p");
-        description.id = "description";
-        description.innerText = product.productDescription;
-        details.appendChild(description);
-
-        let price = document.createElement("p");
-        price.id = "price";
-        price.innerHTML = '<span class="number_tags">Product price : </span>'  + product.productPrice;
-        details.appendChild(price);
-
-        let quantity = document.createElement("p");
-        quantity.id = "quantity";
-        quantity.innerHTML = '<span class="number_tags">Product quantity : </span>' + product.productQuantity;
-        details.appendChild(quantity);
-    
-        productCatalogue.appendChild(img);
-        productCatalogue.appendChild(details);
-        productCatalogueContainer.appendChild(productCatalogue);
+        // console.log(product);
+        setLocalStorage(product);
+        addProductToUI(product);
     }
     else{
         alert(isValid.message);
     }
+});
+
+loadArrayFromLocalStorage();
+function loadArrayFromLocalStorage() {
+    products = getLocalStorage();
+    products.forEach(element => {
+        addProductToUI(element);
+    });    
+}
+
+function addProductToUI(product) {
+
+    let productCatalogue = document.createElement("div");
+    productCatalogue.classList.add("product_catalogue");
+    let img = document.createElement("img");
+
+    let details = document.createElement("div");
+    details.id = "details";
+
+    let name = document.createElement("b");
+    name.innerText = product.productName;
+    details.appendChild(name);
+
+    let description = document.createElement("p");
+    description.id = "description";
+    description.innerText = product.productDescription;
+    details.appendChild(description);
+
+    let price = document.createElement("p");
+    price.id = "price";
+    price.innerHTML = '<span class="number_tags">Product price : </span>'  + product.productPrice;
+    details.appendChild(price);
+
+    let quantity = document.createElement("p");
+    quantity.id = "quantity";
+    quantity.innerHTML = '<span class="number_tags">Product quantity : </span>' + product.productQuantity;
+    details.appendChild(quantity);
+
+    productCatalogue.appendChild(img);
+    productCatalogue.appendChild(details);
+    productCatalogueContainer.appendChild(productCatalogue);
+    
     productNameNode.value = "";
     productDescriptionNode.value = "";
     productPriceNode.value = "";
@@ -69,13 +80,13 @@ function validateInputs(product) {
     // let productQuantity = product.productQuantity;
 
     // ES6 way to get elements from product object
+    console.log(product);
     let {
         productName,
         productPrice,
         productQuantity,
         productDescription
     } = product;
-
     // console.log(productName);
 
     if (productName === "") {
@@ -105,4 +116,24 @@ function validateInputs(product) {
     return {
         status : true
     } 
+}
+
+function setLocalStorage(product) {
+
+    let products = getLocalStorage();
+    products.push(product);
+    localStorage.setItem("product_info",JSON.stringify(products));
+
+}
+function getLocalStorage() {
+    
+    if (localStorage.getItem("product_info") === null) {
+        let product_info = [];
+        return product_info;
+    }
+    else{
+        product_info = JSON.parse(localStorage.getItem("product_info"));
+        return product_info;
+    }
+
 }
