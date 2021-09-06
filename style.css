@@ -56,28 +56,49 @@ textarea{
 }
 #product_catalogue_container{
     display: flex;
-    margin: 5% 5% 0%;
-    /* width: 100vw; */
-}
-.product_catalogue{
     flex-direction: row;
     flex-wrap: wrap;
-    border: 1px solid black;
-    width: 20vw;
-    margin: 1%;
+    margin: 5% 5% 0%;
 }
-b{
-    display: block;
-    text-align: center;
+.product_catalogue{
+    border: 1px solid black;
+    width: 31%;
+    margin: 1%;
+    padding: 0%;
+}
+
+#details{
+    display: flex;
+    flex-direction: column;
 }
 p{
     padding: 0% 5%;
+    margin: 2%;
+}
+#description{
+    word-break: break-all;
+    text-align: justify;
+    width: 40%;
+    margin-top: 0%;
+    margin-left: 55%;
+    padding: 0%;
+}
+#name{
+    display: inline-block;
+    word-break: break-all;
+    width: 40%;
+    margin-top: 0%;
+    margin-left: 18%;
+    padding: 0%;
+    
 }
 #price,#quantity{
-    text-align: right;
-    margin-right: 20%;
+    text-align: center;
+    width: 70%;
+    margin: 0% 0% 0% 25%;
+    padding: 0%;
 }
-.number_tags{
+.name_tags{
     float: left;
     font-weight: bold;
 }
