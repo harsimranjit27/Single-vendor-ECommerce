@@ -43,23 +43,24 @@ function addProductToUI(product) {
     let details = document.createElement("div");
     details.id = "details";
 
-    let name = document.createElement("b");
-    name.innerText = product.productName;
+    let name = document.createElement("p");
+    // name.id = "name";
+    name.innerHTML = '<span class="name_tags">Product name :  </span><b id="name"> '+product.productName+' </b> ';
     details.appendChild(name);
 
     let description = document.createElement("p");
-    description.id = "description";
-    description.innerText = product.productDescription;
+    // description.id = "description";
+    description.innerHTML = '<span class="name_tags">Product description : </span> <p id="description"> '+ product.productDescription+'</p>';
     details.appendChild(description);
 
     let price = document.createElement("p");
-    price.id = "price";
-    price.innerHTML = '<span class="number_tags">Product price : </span>'  + product.productPrice;
+    // price.id = "price";
+    price.innerHTML = '<span class="name_tags">Product price : </span> <p id="price" >' + product.productPrice + '</p>';
     details.appendChild(price);
 
     let quantity = document.createElement("p");
-    quantity.id = "quantity";
-    quantity.innerHTML = '<span class="number_tags">Product quantity : </span>' + product.productQuantity;
+    // quantity.id = "quantity";
+    quantity.innerHTML = '<span class="name_tags">Product quantity : </span> <p id="quantity"> ' + product.productQuantity + '</p>';
     details.appendChild(quantity);
 
     productCatalogue.appendChild(img);
