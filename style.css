@@ -9,34 +9,26 @@ h1{
     text-align: center;
 }
 #product_info{
-    width: 45%;
+    width: 55%;
     border: 2px solid lightgray;
     position: relative;
     margin: 0% auto;
     padding: 2% 4%;
 }
 .product_details{
-    margin: 3% 0%;
-    position: relative;
+    margin: 2% 0%;
 }
 .input_name{
     width: 45%;
     text-align: justify;
 }
 .inputs{
-    width: 40%;
-    height: 75%;
-    position: absolute;
-    right: 5%;
-}
-textarea{
-    resize: vertical;
-    height: 100%;
-    width: 40%;
+    width: 51%;
+    float: right;
 }
 #choose_file{
     position: absolute;
-    left: 41%;
+    left: 41%; 
 }
 #add_product{
     width: 24%;
@@ -57,41 +49,40 @@ textarea{
     border: 1px solid black;
     width: 31%;
     margin: 1%;
-    padding: 0%;
+    padding: 1% 0 1% 0;
 }
-
 #details{
     display: flex;
     flex-direction: column;
 }
-p{
-    padding: 0% 5%;
-    margin: 2%;
+#detail_from_localStorage{
+    width: 50%;
+    float: right;
+    margin-right: 1%;
+    margin-bottom: 1%;
 }
-#description{
-    word-break: break-all;
-    text-align: justify;
-    width: 40%;
-    margin-top: 0%;
-    margin-left: 55%;
-    padding: 0%;
+span{
+    font-weight: bold;
+    font-size: large;
 }
-#name{
-    display: inline-block;
-    word-break: break-all;
-    width: 40%;
-    margin-top: 0%;
-    margin-left: 18%;
-    padding: 0%;
-    
-}
-#price,#quantity{
-    text-align: center;
-    width: 70%;
-    margin: 0% 0% 0% 25%;
-    padding: 0%;
-}
-.name_tags{
+.detailSpan{
+    margin-left: 1%;
     float: left;
     font-weight: bold;
+    font-size: medium;
+}
+#update_btn,#delete_btn{
+    width: 49%;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    padding: 2% 0%;
+}
+#update_btn{
+    margin: 0 0.25% 0 0.5%;
+    background-color: #007BFF;
+}
+#delete_btn{
+    margin: 0 0.75% 0 0.25%;
+    background-color: red;
 }
