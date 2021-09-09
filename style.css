@@ -36,14 +36,7 @@ textarea{
 }
 #choose_file{
     position: absolute;
-    left: 40%;
-}
-#name_of_file{
-    display: inline-block;
-    position: absolute;
-    left: 57%;
-    width: 20%;
-    text-align: center;
+    left: 41%;
 }
 #add_product{
     width: 24%;
