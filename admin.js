@@ -7,6 +7,7 @@ let addProductButton = document.getElementById("add_product");
 let productCatalogueContainer = document.getElementById("product_catalogue_container");
 
 let productDetails = document.getElementsByClassName("product_details");
+
 if (JSON.parse(localStorage.getItem("product_info")) !== null) {
     var count=JSON.parse(localStorage.getItem("product_info")).length;
 }
@@ -47,30 +48,72 @@ function addProductToUI(product) {
 
     let productCatalogue = document.createElement("div");
     productCatalogue.classList.add("product_catalogue");
-    let img = document.createElement("img");
 
+    // image
+    let img = document.createElement("img");
+    // details
     let details = document.createElement("div");
     details.id = "details";
-
-    let name = document.createElement("p");
-    // name.id = "name";
-    name.innerHTML = '<span class="name_tags">Product name :  </span><b id="name"> '+product.productName+' </b> ';
+    // detail-1
+    let name = document.createElement("div");
+    name.id = "name";
+    let nameSpan = document.createElement("span");
+    nameSpan.classList.add("detailSpan");
+    nameSpan.innerText = "Product Name : ";
+    let nameInput = document.createElement("input");
+    nameInput.value = product.productName;
+    nameInput.id = "detail_from_localStorage";
+    name.appendChild(nameSpan);
+    name.appendChild(nameInput);
     details.appendChild(name);
-
-    let description = document.createElement("p");
-    // description.id = "description";
-    description.innerHTML = '<span class="name_tags">Product description : </span> <p id="description"> '+ product.productDescription+'</p>';
+    // detail-2
+    let description = document.createElement("div");
+    description.id = "description";
+    let descSpan = document.createElement("span");
+    descSpan.classList.add("detailSpan");
+    descSpan.innerText = "Product Description : ";
+    let descInput = document.createElement("input");
+    descInput.id = "detail_from_localStorage";
+    descInput.value = product.productDescription;
+    description.appendChild(descSpan);
+    description.appendChild(descInput);
     details.appendChild(description);
-
-    let price = document.createElement("p");
-    // price.id = "price";
-    price.innerHTML = '<span class="name_tags">Product price : </span> <p id="price" >' + product.productPrice + '</p>';
+    // detail-3
+    let price = document.createElement("div");
+    price.id = "price";
+    let priceSpan = document.createElement("span");
+    priceSpan.classList.add("detailSpan");
+    priceSpan.innerText = "Product Price : ";
+    let priceInput = document.createElement("input");
+    priceInput.id = "detail_from_localStorage";
+    priceInput.value = product.productPrice;
+    price.appendChild(priceSpan);
+    price.appendChild(priceInput);
     details.appendChild(price);
-
-    let quantity = document.createElement("p");
-    // quantity.id = "quantity";
-    quantity.innerHTML = '<span class="name_tags">Product quantity : </span> <p id="quantity"> ' + product.productQuantity + '</p>';
+    // detail-4
+    let quantity = document.createElement("div");
+    quantity.id = "quantity";
+    let quantitySpan = document.createElement("span");
+    quantitySpan.classList.add("detailSpan");
+    quantitySpan.innerText = "Product Quantity : ";
+    let quantityInput = document.createElement("input");
+    quantityInput.id = "detail_from_localStorage";
+    quantityInput.value = product.productQuantity;
+    quantity.appendChild(quantitySpan);
+    quantity.appendChild(quantityInput);
     details.appendChild(quantity);
+    
+    let btnDiv = document.createElement("div");
+    btnDiv.id = "btnDiv";
+    let updateBtn = document.createElement("button");
+    updateBtn.id = "update_btn";
+    updateBtn.innerText = "UPDATE";
+    let deleteBtn = document.createElement("button");
+    deleteBtn.id = "delete_btn";
+    deleteBtn.innerText = "DELETE";
+    btnDiv.appendChild(updateBtn);
+    btnDiv.appendChild(deleteBtn);
+    details.appendChild(btnDiv);
 
     productCatalogue.appendChild(img);
     productCatalogue.appendChild(details);
