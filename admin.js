@@ -6,13 +6,22 @@ let productImageButton = document.getElementById("choose_file");
 let addProductButton = document.getElementById("add_product");
 let productCatalogueContainer = document.getElementById("product_catalogue_container");
 
+let productDetails = document.getElementsByClassName("product_details");
+if (JSON.parse(localStorage.getItem("product_info")) !== null) {
+    var count=JSON.parse(localStorage.getItem("product_info")).length;
+}
+else{
+    var count = 0;
+}
+
 addProductButton.addEventListener("click",()=>{
 
     let product = {
         productName : productNameNode.value,
         productDescription : productDescriptionNode.value,
         productPrice : productPriceNode.value,
-        productQuantity : productQuantityNode.value
+        productQuantity : productQuantityNode.value,
+        productID : ++count
     }    
 
     let isValid = validateInputs(product);
