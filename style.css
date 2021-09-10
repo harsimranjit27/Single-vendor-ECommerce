@@ -1,9 +1,11 @@
 body{
     box-sizing: border-box;
+    margin: 0%;
+    overflow-x: hidden;
 }
 .container{
-    width: 90%;
-    margin: 0% 5%;
+    width: 100vw;
+    /* margin: 0 5vw; */
 }
 h1{
     text-align: center;
@@ -44,18 +46,20 @@ h1{
     flex-direction: row;
     flex-wrap: wrap;
     margin: 5% 5% 0%;
+    width: 90vw;
 }
 .product_catalogue{
     border: 1px solid black;
     width: 31%;
     margin: 1%;
-    padding: 1% 0 1% 0;
+    padding: 1% 0 0.2% 0;
+    border-radius: 3px;
 }
-#details{
+.details{
     display: flex;
     flex-direction: column;
 }
-#detail_from_localStorage{
+.detail_from_localStorage{
     width: 50%;
     float: right;
     margin-right: 1%;
@@ -71,18 +75,62 @@ span{
     font-weight: bold;
     font-size: medium;
 }
-#update_btn,#delete_btn{
+.update_btn,.delete_btn{
     width: 49%;
     color: white;
     border-radius: 3px;
     border: none;
     padding: 2% 0%;
 }
-#update_btn{
-    margin: 0 0.25% 0 0.5%;
+.update_btn{
+    margin: 0 0.25% 0 0.75%;
     background-color: #007BFF;
 }
-#delete_btn{
-    margin: 0 0.75% 0 0.25%;
+.delete_btn{
+    margin: 0 0.5% 0 0.25%;
     background-color: red;
 }
+
+@media (min-width : 725px) and (max-width : 1240px){
+    body{
+        width: 100vw;
+        margin: 0%;
+    }
+    .container{
+        width: 100vw;
+        margin: 0%;
+    }
+    #product_info{
+        margin: 0% 5%;
+        width: 80vw;
+    }
+    #product_catalogue_container{
+        width: 90vw;
+    }
+    .product_catalogue{
+        width: 47.5%;
+    }
+    .detailSpan{
+        width: 45%;
+        font-size: small;
+    }
+    .details :nth-child(n){
+        margin-top: 1%;
+    }
+}
+@media (min-width : 425px) and (max-width : 725px){
+    #product_info{
+        width: 80%;
+    }
+    .product_catalogue{
+        width: 100%;
+    }
+    .detailSpan{
+        width: 45%;
+        font-size: small;
+    }
+    .details :nth-child(n){
+        margin-top: 0%;
+    }
+}
+
