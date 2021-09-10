@@ -6,8 +6,6 @@ let productImageButton = document.getElementById("choose_file");
 let addProductButton = document.getElementById("add_product");
 let productCatalogueContainer = document.getElementById("product_catalogue_container");
 
-let productDetails = document.getElementsByClassName("product_details");
-
 if (JSON.parse(localStorage.getItem("product_info")) !== null) {
     var count=JSON.parse(localStorage.getItem("product_info")).length;
 }
@@ -38,78 +36,84 @@ addProductButton.addEventListener("click",()=>{
 
 loadArrayFromLocalStorage();
 function loadArrayFromLocalStorage() {
-    products = getLocalStorage();
+    let products = getLocalStorage();
     products.forEach(element => {
         addProductToUI(element);
     });    
 }
-
 function addProductToUI(product) {
 
     let productCatalogue = document.createElement("div");
     productCatalogue.classList.add("product_catalogue");
+    productCatalogue.id = product.productID;
 
     // image
-    let img = document.createElement("img");
+    var img = document.createElement("img");
+    img.classList.add("product_images");
     // details
     let details = document.createElement("div");
-    details.id = "details";
+    details.classList.add("details");
     // detail-1
     let name = document.createElement("div");
-    name.id = "name";
+    name.classList.add("name");
     let nameSpan = document.createElement("span");
     nameSpan.classList.add("detailSpan");
     nameSpan.innerText = "Product Name : ";
-    let nameInput = document.createElement("input");
+    var nameInput = document.createElement("input");
     nameInput.value = product.productName;
-    nameInput.id = "detail_from_localStorage";
+    nameInput.classList.add("detail_from_localStorage");
+    nameInput.id = "nameInput";
     name.appendChild(nameSpan);
     name.appendChild(nameInput);
     details.appendChild(name);
     // detail-2
     let description = document.createElement("div");
-    description.id = "description";
+    description.classList.add("description");
     let descSpan = document.createElement("span");
     descSpan.classList.add("detailSpan");
     descSpan.innerText = "Product Description : ";
-    let descInput = document.createElement("input");
-    descInput.id = "detail_from_localStorage";
+    var descInput = document.createElement("input");
+    descInput.classList.add("detail_from_localStorage");
+    descInput.id = "descInput";
     descInput.value = product.productDescription;
     description.appendChild(descSpan);
     description.appendChild(descInput);
     details.appendChild(description);
     // detail-3
     let price = document.createElement("div");
-    price.id = "price";
+    price.classList.add("price");
     let priceSpan = document.createElement("span");
     priceSpan.classList.add("detailSpan");
     priceSpan.innerText = "Product Price : ";
-    let priceInput = document.createElement("input");
-    priceInput.id = "detail_from_localStorage";
+    var priceInput = document.createElement("input");
+    priceInput.classList.add("detail_from_localStorage");
+    priceInput.id = "priceInput";
     priceInput.value = product.productPrice;
     price.appendChild(priceSpan);
     price.appendChild(priceInput);
     details.appendChild(price);
     // detail-4
     let quantity = document.createElement("div");
-    quantity.id = "quantity";
+    quantity.classList.add("quantity");
     let quantitySpan = document.createElement("span");
     quantitySpan.classList.add("detailSpan");
     quantitySpan.innerText = "Product Quantity : ";
-    let quantityInput = document.createElement("input");
-    quantityInput.id = "detail_from_localStorage";
+    var quantityInput = document.createElement("input");
+    quantityInput.classList.add("detail_from_localStorage");
+    quantityInput.id = "quantityInput";
     quantityInput.value = product.productQuantity;
     quantity.appendChild(quantitySpan);
     quantity.appendChild(quantityInput);
     details.appendChild(quantity);
+    let productDetails = document.getElementsByClassName("product_details");
     
     let btnDiv = document.createElement("div");
-    btnDiv.id = "btnDiv";
-    let updateBtn = document.createElement("button");
-    updateBtn.id = "update_btn";
+    btnDiv.classList.add("btnDiv");
+    var updateBtn = document.createElement("button");
+    updateBtn.classList.add("update_btn");
     updateBtn.innerText = "UPDATE";
-    let deleteBtn = document.createElement("button");
-    deleteBtn.id = "delete_btn";
+    var deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete_btn");
     deleteBtn.innerText = "DELETE";
     btnDiv.appendChild(updateBtn);
     btnDiv.appendChild(deleteBtn);
@@ -123,6 +127,11 @@ function addProductToUI(product) {
     productDescriptionNode.value = "";
     productPriceNode.value = "";
     productQuantityNode.value = "";
+
+    updateBtn.addEventListener("click",(event)=>{
+        updateProduct(event);
+    });
+
 }
 
 function validateInputs(product) {
@@ -133,7 +142,7 @@ function validateInputs(product) {
     // let productQuantity = product.productQuantity;
 
     // ES6 way to get elements from product object
-    console.log(product);
+    // console.log(product);
     let {
         productName,
         productPrice,
@@ -171,15 +180,39 @@ function validateInputs(product) {
     } 
 }
 
-function setLocalStorage(product) {
+function updateProduct(event) {
+    let currentID = event.target.parentNode.parentNode.parentNode.id;
+    // console.log(currentID);
+    let updatedName = document.getElementById(currentID).childNodes[1].childNodes[0].childNodes[1].value;
+    // console.log(updatedName);
+    let updatedDesc = document.getElementById(currentID).childNodes[1].childNodes[1].childNodes[1].value;
+    // console.log(updatedDesc);
+    let updatedPrice = document.getElementById(currentID).childNodes[1].childNodes[2].childNodes[1].value;
+    // console.log(updatedPrice);
+    let updatedQuantity = document.getElementById(currentID).childNodes[1].childNodes[3].childNodes[1].value;
+    // console.log(updatedQuantity);
 
+    let arr = getLocalStorage();
+
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i].productID == currentID){
+            arr[i].productName = updatedName;
+            arr[i].productDescription = updatedDesc;
+            arr[i].productPrice = updatedPrice;
+            arr[i].productQuantity = updatedQuantity;
+            arr[i].id = currentID;
+            localStorage.setItem("product_info",JSON.stringify(arr));
+            break;
+        }
+    }
+}
+
+function setLocalStorage(product) {
     let products = getLocalStorage();
     products.push(product);
     localStorage.setItem("product_info",JSON.stringify(products));
-
 }
 function getLocalStorage() {
-    
     if (localStorage.getItem("product_info") === null) {
         let product_info = [];
         return product_info;
@@ -188,5 +221,4 @@ function getLocalStorage() {
         product_info = JSON.parse(localStorage.getItem("product_info"));
         return product_info;
     }
-
 }
