@@ -2,27 +2,43 @@ let productNameNode = document.getElementById("product_name");
 let productDescriptionNode = document.getElementById("product_description");
 let productPriceNode = document.getElementById("product_price");
 let productQuantityNode = document.getElementById("product_quantity");
-let productImageButton = document.getElementById("choose_file");
+
+let productImage = document.getElementById("choose_file");
+
 let addProductButton = document.getElementById("add_product");
 let productCatalogueContainer = document.getElementById("product_catalogue_container");
 
+
 if (JSON.parse(localStorage.getItem("product_info")) !== null) {
-    var count=JSON.parse(localStorage.getItem("product_info")).length;
+    var count=JSON.parse(localStorage.getItem("product_info")).length+1;
 }
 else{
     var count = 0;
 }
 
+var imageDataURL;
+productImage.addEventListener("change",changeFileNameToString);
+function changeFileNameToString(){
+    let reader = new FileReader();
+    reader.readAsDataURL(this.files[0]); // for multiple files use loop
+    reader.addEventListener("load",()=>{
+        imageDataURL = reader.result;
+        // console.log(imageDataURL);
+        return imageDataURL;
+    });
+}
 addProductButton.addEventListener("click",()=>{
-
+    
+    // let imageDataURL = changeFileNameToString();
+    console.log(imageDataURL);
     let product = {
         productName : productNameNode.value,
         productDescription : productDescriptionNode.value,
         productPrice : productPriceNode.value,
         productQuantity : productQuantityNode.value,
-        productID : ++count
-    }    
-
+        productID : ++count,
+        productImage : imageDataURL
+    }
     let isValid = validateInputs(product);
     if(isValid.status){
         // console.log(product);
@@ -45,11 +61,16 @@ function addProductToUI(product) {
 
     let productCatalogue = document.createElement("div");
     productCatalogue.classList.add("product_catalogue");
-    productCatalogue.id = product.productID;
-
+    // if(arr.length != null){
+    //     productCatalogue.id = arr[arr.length-1].productID + 1;
+    // }
+    // else{
+        productCatalogue.id = product.productID;
+    // }
     // image
     var img = document.createElement("img");
     img.classList.add("product_images");
+    img.setAttribute("src",product.productImage);
     // details
     let details = document.createElement("div");
     details.classList.add("details");
@@ -128,10 +149,14 @@ function addProductToUI(product) {
     productPriceNode.value = "";
     productQuantityNode.value = "";
 
+    // UPDATE BUTTON
     updateBtn.addEventListener("click",(event)=>{
         updateProduct(event);
     });
-
+    // DELETE BUTTON
+    deleteBtn.addEventListener("click",(event)=>{
+        deleteProduct(event);
+    })
 }
 
 function validateInputs(product) {
@@ -181,29 +206,46 @@ function validateInputs(product) {
 }
 
 function updateProduct(event) {
-    let currentID = event.target.parentNode.parentNode.parentNode.id;
+    let currentNode = event.target.parentNode.parentNode.parentNode;
     // console.log(currentID);
-    let updatedName = document.getElementById(currentID).childNodes[1].childNodes[0].childNodes[1].value;
+    let updatedName = currentNode.childNodes[1].childNodes[0].childNodes[1].value;
     // console.log(updatedName);
-    let updatedDesc = document.getElementById(currentID).childNodes[1].childNodes[1].childNodes[1].value;
+    let updatedDesc = currentNode.childNodes[1].childNodes[1].childNodes[1].value;
     // console.log(updatedDesc);
-    let updatedPrice = document.getElementById(currentID).childNodes[1].childNodes[2].childNodes[1].value;
+    let updatedPrice = currentNode.childNodes[1].childNodes[2].childNodes[1].value;
     // console.log(updatedPrice);
-    let updatedQuantity = document.getElementById(currentID).childNodes[1].childNodes[3].childNodes[1].value;
+    let updatedQuantity = currentNode.childNodes[1].childNodes[3].childNodes[1].value;
     // console.log(updatedQuantity);
 
     let arr = getLocalStorage();
 
     for (let i = 0; i < arr.length; i++) {
-        if(arr[i].productID == currentID){
+        if(arr[i].productID == currentNode.id){
             arr[i].productName = updatedName;
             arr[i].productDescription = updatedDesc;
             arr[i].productPrice = updatedPrice;
             arr[i].productQuantity = updatedQuantity;
-            arr[i].id = currentID;
             localStorage.setItem("product_info",JSON.stringify(arr));
             break;
         }
+    }
+}
+function deleteProduct(event) {
+    
+    let deleteIdNode = event.target.parentNode.parentNode.parentNode;
+    console.log(deleteIdNode);
+    
+    let parentContainer = deleteIdNode.parentNode;
+    parentContainer.removeChild(deleteIdNode);
+
+    let arr = getLocalStorage();
+    // console.log(arr[deleteIdNode.id]);
+    // arr.splice(arr[deleteIdNode.id],1);
+    // localStorage.setItem("product_info",JSON.stringify(arr));
+    for (let i = deleteIdNode.id-2; i < arr.length; i++) {
+        console.log(arr[i].productID);
+        arr[i].productID = i-1;
+        localStorage.setItem("product_info",JSON.stringify(arr));
     }
 }
 
