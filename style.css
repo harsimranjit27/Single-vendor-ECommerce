@@ -1,6 +1,6 @@
 body{
     box-sizing: border-box;
-    margin: 0%;
+    margin: 0;
     overflow-x: hidden;
 }
 .container{
@@ -51,9 +51,16 @@ h1{
 .product_catalogue{
     border: 1px solid black;
     width: 31%;
-    margin: 1%;
-    padding: 1% 0 0.2% 0;
+    margin: 0.5%;
+    padding-bottom: 0.25%;
     border-radius: 3px;
+    position: relative;
+}
+.product_images{
+    width: 50%;
+    height: 210px;
+    margin: 1% 25%;
+    border-radius: 2%;
 }
 .details{
     display: flex;
