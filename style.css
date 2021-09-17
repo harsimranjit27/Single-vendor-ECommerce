@@ -116,6 +116,7 @@ span{
     }
     .product_catalogue{
         width: 47.5%;
+        margin: 1%;
     }
     .detailSpan{
         width: 45%;
@@ -130,6 +131,10 @@ span{
         width: 80%;
     }
     .product_catalogue{
+        margin: 1% auto;
+        width: 60%;
+    }
+    .details{
         width: 100%;
     }
     .detailSpan{
