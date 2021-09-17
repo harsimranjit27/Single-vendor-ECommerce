@@ -148,7 +148,7 @@ function addProductToUI(product) {
     productDescriptionNode.value = "";
     productPriceNode.value = "";
     productQuantityNode.value = "";
-
+    productImage.value = "";
     // UPDATE BUTTON
     updateBtn.addEventListener("click",(event)=>{
         updateProduct(event);
