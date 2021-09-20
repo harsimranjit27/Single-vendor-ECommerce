@@ -112,7 +112,9 @@ span{
         width: 80vw;
     }
     #product_catalogue_container{
-        width: 90vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
     }
     .product_catalogue{
         width: 47.5%;
