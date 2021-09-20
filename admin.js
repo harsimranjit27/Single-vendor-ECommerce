@@ -10,7 +10,9 @@ let productCatalogueContainer = document.getElementById("product_catalogue_conta
 
 
 if (JSON.parse(localStorage.getItem("product_info")) !== null) {
-    var count=JSON.parse(localStorage.getItem("product_info")).length+1;
+    let arr = JSON.parse(localStorage.getItem("product_info"));
+    let len = arr.length;
+    var count = arr[len-1].productID+1;
 }
 else{
     var count = 0;
@@ -36,7 +38,7 @@ addProductButton.addEventListener("click",()=>{
         productDescription : productDescriptionNode.value,
         productPrice : productPriceNode.value,
         productQuantity : productQuantityNode.value,
-        productID : ++count,
+        productID : count++,
         productImage : imageDataURL
     }
     let isValid = validateInputs(product);
@@ -239,12 +241,12 @@ function deleteProduct(event) {
     parentContainer.removeChild(deleteIdNode);
 
     let arr = getLocalStorage();
-    // console.log(arr[deleteIdNode.id]);
-    // arr.splice(arr[deleteIdNode.id],1);
-    // localStorage.setItem("product_info",JSON.stringify(arr));
-    for (let i = deleteIdNode.id-2; i < arr.length; i++) {
+    console.log(arr[deleteIdNode.id - arr[0].productID]);
+    arr.splice(deleteIdNode.id - arr[0].productID,1);
+    localStorage.setItem("product_info",JSON.stringify(arr));
+    for (let i = deleteIdNode.id+1; i < arr.length; i++) {
         console.log(arr[i].productID);
-        arr[i].productID = i-1;
+        arr[i-1].productID = i-1;
         localStorage.setItem("product_info",JSON.stringify(arr));
     }
 }
