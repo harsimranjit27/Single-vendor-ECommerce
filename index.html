@@ -7,7 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="login_container">
+        <div class="login_box">
+            <h1 id="login_heading">LOGIN</h1>
+            <div class="login_details">
+                <label for="email" id="email_label"><b>E-Mail ID</b></label>
+                <input type="email" id="login_email" placeholder="Enter your E-Mail">
+            </div>
+            <div class="login_details">    
+                <label for="password" id="pass_label"><b>Password</b></label>
+                <input type="password" id="login_pass" placeholder="Enter your password">
+            </div>
+            <div class="typeOfUser">
+                <input type="radio" id="radio_input_user">User
+                <input type="radio" id="radio_input_admin">Admin
+            </div>
+            <div class="login_button">
+                <button type="submit" id="login_btn">
+                    Login
+                </button>
+            </div>
+            <div class="sign_up">
+                <p id="create_account">Create new Account</p>
+            </div>
+        </div>
+    </div>
+    <div class="admin_container">
         <h1>Welcome Admin</h1>
         <div id="product_info">
             <div class="product_details">
