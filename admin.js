@@ -8,11 +8,11 @@ let productImage = document.getElementById("choose_file");
 let addProductButton = document.getElementById("add_product");
 let productCatalogueContainer = document.getElementById("product_catalogue_container");
 
-
-if (JSON.parse(localStorage.getItem("product_info")).length) {
+// console.log(localStorage.getItem("product_info"));
+if ((localStorage.getItem("product_info"))) {
     let arr = JSON.parse(localStorage.getItem("product_info"));
     let len = arr.length;
-    var count = arr[len-1].productID+1;
+    var count = arr[len-1].productID + 1;
 }
 else{
    var count = 0; 
