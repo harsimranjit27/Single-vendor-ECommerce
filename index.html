@@ -9,27 +9,30 @@
 <body>
     <div class="login_container">
         <div class="login_box">
-            <h1 id="login_heading">LOGIN</h1>
-            <div class="login_details">
-                <label for="email" id="email_label"><b>E-Mail ID</b></label>
-                <input type="email" id="login_email" placeholder="Enter your E-Mail">
-            </div>
-            <div class="login_details">    
-                <label for="password" id="pass_label"><b>Password</b></label>
-                <input type="password" id="login_pass" placeholder="Enter your password">
-            </div>
-            <div class="typeOfUser">
-                <input type="radio" id="radio_input_user">User
-                <input type="radio" id="radio_input_admin">Admin
-            </div>
-            <div class="login_button">
-                <button type="submit" id="login_btn">
-                    Login
-                </button>
-            </div>
-            <div class="sign_up">
-                <p id="create_account">Create new Account</p>
-            </div>
+            <!-- <form action="#" method="get"> -->
+                <h1 id="login_heading">LOGIN</h1>
+                <p id="invalid_email">Please enter a valid email</p>
+                <p id="selectUserType">Select user type as 'Admin' or 'User'</p>
+                <p id="notRegisteredMessage">This email is not registered with us .<br>Please create a new account to proceed further.</p>
+                <div class="login_details">
+                    <label for="email" id="email_label"><b>E-Mail ID</b></label>
+                    <input type="email" id="login_email" placeholder="Enter your E-Mail">
+                </div>
+                <div class="login_details">    
+                    <label for="password" id="pass_label"><b>Password</b></label>
+                    <input type="password" id="login_pass" placeholder="Enter your password">
+                </div>
+                <div class="typeOfUser">
+                    <input type="radio" id="radio_input_user"><label class="radio_labels">User</label>
+                    <input type="radio" id="radio_input_admin"><label class="radio_labels">Admin</label>
+                </div>
+                <div class="login_button">
+                    <input type="submit" value="Login" id="login_btn">
+                </div>
+                <div class="sign_up">
+                    <p id="create_account">Create new Account</p>
+                </div>
+            <!-- </form> -->
         </div>
     </div>
     <div class="admin_container">
@@ -61,6 +64,7 @@
     <div id="product_catalogue_container">
 
     </div>
+    <script src="login.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>
