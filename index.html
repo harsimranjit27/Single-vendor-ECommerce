@@ -23,8 +23,8 @@
                     <input type="password" id="login_pass" placeholder="Enter your password">
                 </div>
                 <div class="typeOfUser">
-                    <input type="radio" name="radioBtn" id="radio_input_user"><label class="radio_labels">User</label>
-                    <input type="radio" name="radioBtn" id="radio_input_admin"><label class="radio_labels">Admin</label>
+                    <input type="radio" name="radioBtn" id="radio_input_user"><label id="user_labels">User</label>
+                    <input type="radio" name="radioBtn" id="radio_input_admin"><label id="admin_labels">Admin</label>
                 </div>
                 <div class="login_button">
                     <input type="submit" value="Login" id="login_btn">
@@ -33,6 +33,32 @@
                     <p id="create_account">Create new Account</p>
                 </div>
             <!-- </form> -->
+        </div>
+    </div>
+    <div class="signUpContainer">
+        <div class="sign_up_box">
+            <h1 id="signUpHeading">Sign up</h1>
+            <div class="signUpDetails">
+                <label for="fname" class="labels" >First Name : </label>
+                <input type="text" class="signUpInputs" name="firstName" id="first_name" placeholder="First Name" required>
+            </div>
+            <div class="signUpDetails">
+                <label for="fname" class="labels">Last Name : </label>
+                <input type="text" class="signUpInputs" name="lastName" id="last_name" placeholder="Last Name">
+            </div>
+            <div class="signUpDetails">
+                <label for="email" class="labels">E-mail ID : </label>
+                <input type="email" class="signUpInputs" name="email" id="emailAddress" placeholder="Email Address">
+            </div>
+            <div class="signUpDetails">
+                <label for="password" class="labels">New Password : </label>
+                <input type="password" class="signUpInputs" name="password" id="newPassword" placeholder="Enter your password">
+            </div>
+            <div class="signUpDetails">
+                <label for="fname" class="labels">Re-enter Password : </label>
+                <input type="password" class="signUpInputs" name="" id="reenterPassword" placeholder="Re-enter your password">
+            </div>
+            <button id="registerBtn">Register</button>
         </div>
     </div>
     <div class="admin_container">
