@@ -8,16 +8,16 @@ body {
 
 /* Login Form CSS*/
 .login_container {
-    background-color: whitesmoke;
+    background-color: rgb(245, 239, 239);
     padding: 10% 25%;
-    /* display: none; */
+    display: none;
 }
 
 .login_box {
     padding: 5% 2%;
     text-align: center;
     position: relative;
-    background-color: rgb(250, 241, 224);
+    background-color: rgb(250, 234, 203);
     border-radius: 10px;
 }
 
@@ -104,7 +104,7 @@ body {
 
 .signUpContainer{
     background-color: rgb(245, 239, 239);
-    display: none;
+    /* display: none; */
     width: 50%;
     margin: 10% auto;
 }
