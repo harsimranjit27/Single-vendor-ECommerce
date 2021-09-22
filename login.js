@@ -5,7 +5,6 @@
  *  Get login button
  *  Get new sign up button
  */
-
 let loginButton = document.getElementById("login_btn");
 let newSignUp = document.getElementById("create_account");
 
@@ -19,13 +18,9 @@ loginButton.addEventListener("click", () => {
     // console.log(emailID);
     let password = document.getElementById("login_pass").value;
     // console.log(password);
-    let userType = "";
+    
+    let userType = clickUserType();
 
-    if (document.getElementById("radio_input_user").checked) {
-        userType = "user";
-    } else if (document.getElementById("radio_input_admin").checked) {
-        userType = "admin";
-    }
     // Validation
     if (emailID) {
         var validEMail = validateEmail(emailID);
@@ -57,6 +52,18 @@ loginButton.addEventListener("click", () => {
         password.value = "";
     }
 });
+
+function clickUserType() {  
+    let userType = "";
+    if (document.getElementById("radio_input_user").checked) {
+        userType = "user";
+    }
+    else if (document.getElementById("radio_input_admin").checked) {
+        userType = "admin";
+    }
+    return userType;
+}
+
 
 function validateEmail(emailID){
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
