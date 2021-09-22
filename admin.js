@@ -9,10 +9,12 @@ let addProductButton = document.getElementById("add_product");
 let productCatalogueContainer = document.getElementById("product_catalogue_container");
 
 // console.log(localStorage.getItem("product_info"));
-if ((localStorage.getItem("product_info"))) {
+if (JSON.parse(localStorage.getItem("product_info")) !== undefined || JSON.parse(localStorage.getItem("product_info")) !== null) {
     let arr = JSON.parse(localStorage.getItem("product_info"));
-    let len = arr.length;
-    var count = arr[len-1].productID + 1;
+    if(arr){
+        let len = arr.length;
+        var count = arr[len-1].productID+1;
+    }
 }
 else{
    var count = 0; 
