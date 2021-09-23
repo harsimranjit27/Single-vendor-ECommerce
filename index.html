@@ -23,7 +23,7 @@
                     <input type="password" id="login_pass" placeholder="Enter your password">
                 </div>
                 <div class="typeOfUser">
-                    <input type="radio" name="radioBtn" id="radio_input_user"><label id="user_labels">User</label>
+                    <input type="radio" name="radioBtn" id="radio_input_user"><label class="user_labels">User</label>
                     <input type="radio" name="radioBtn" id="radio_input_admin"><label>Admin</label>
                 </div>
                 <div class="login_button">
@@ -38,6 +38,10 @@
     <div class="signUpContainer">
         <div class="sign_up_box">
             <h1 id="signUpHeading">Sign up</h1>
+            <div class="signUpDetails signUpRadioBtn">
+                <input type="radio" name="typeOfUser" id="type-user"><label class="user_label_signUp">User</label>
+                <input type="radio" name="typeOfUser" id="type-admin"><label>Admin</label>
+            </div>
             <div class="signUpDetails">
                 <label for="fname" class="labels" >First Name : </label>
                 <input type="text" class="signUpInputs" name="firstName" id="first_name" placeholder="First Name" required>
