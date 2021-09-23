@@ -72,7 +72,7 @@ body {
     position: relative;
 }
 
-#user_labels{
+.user_labels{
     margin: 0 14% 0 0;
 }
 
@@ -121,11 +121,24 @@ body {
     margin-top: 0;
     color: orange;
 }
+.user_label_signUp{
+    /* margin-left: 10%; */
+}
 .signUpDetails{
     padding: 0 10%;
     text-align: left;
     margin-top: 2%;
     position: relative;
+}
+.signUpRadioBtn{
+    padding: 0 25%;
+    margin: 0 0 3% 10%;
+}
+.user_label_signUp{
+    margin-right: 15%;
+}
+#type-user,#type-admin{
+    cursor: pointer;
 }
 .signUpInputs{
     width: 50%;
