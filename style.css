@@ -27,7 +27,7 @@ body {
     color: orange;
 }
 
-#invalid_email{
+#invalid_email_login,#invalid_email_signup{
     display: none;
     color: red;
     font-weight: bolder;
@@ -36,7 +36,7 @@ body {
     margin-bottom: 3%;
 }
 
-#selectUserType {
+#selectUserType_login,#selectUserType_signup {
     display: none;
     color: red;
     font-weight: bolder;
@@ -120,9 +120,6 @@ body {
     margin: 3% 5%;
     margin-top: 0;
     color: orange;
-}
-.user_label_signUp{
-    /* margin-left: 10%; */
 }
 .signUpDetails{
     padding: 0 10%;
