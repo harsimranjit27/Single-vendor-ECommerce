@@ -144,7 +144,7 @@ body {
 }
 #newPassMessage,#reenterPassMessage{
     display: none;
-    width: 22%;
+    width: 25%;
     position: absolute;
     top: 0%;
     left: 92%;   
