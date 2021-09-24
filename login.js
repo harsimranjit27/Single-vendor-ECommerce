@@ -10,8 +10,8 @@ let newSignUp = document.getElementById("create_account");
 
 loginButton.addEventListener("click", () => {
 
-    document.getElementById("invalid_email").style.display = "none";
-    document.getElementById("selectUserType").style.display = "none";
+    document.querySelector("#invalid_email_login").style.display = "none";
+    document.querySelector("#selectUserType_signup").style.display = "none";
     document.getElementById("notRegisteredMessage").style.display = "none";
 
     let emailID = document.getElementById("login_email").value;
@@ -33,8 +33,8 @@ loginButton.addEventListener("click", () => {
         document.getElementById("notRegisteredMessage").style.display = "none";
     }
     if (!validEMail) {
-        document.getElementById("invalid_email").style.display = "inline";
-        document.getElementById("selectUserType").style.display = "none";
+        document.querySelector("#invalid_email_login").style.display = "inline";
+        document.querySelector("#selectUserType_login").style.display = "none";
         document.getElementById("notRegisteredMessage").style.display = "none";
     }
     // Whether details are entered or not
@@ -66,11 +66,14 @@ function clickUserType() {
 
 
 function validateEmail(emailID){
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(emailID).toLowerCase());
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(emailID).toLowerCase());
 }
 function checkUserRegisteredOrNot(emailID) {
     let userArr = getUserDetailsFromLocalStorage();
+    if(userArr === null){
+        return false;
+    }
     const foundEMail = userArr.find(email => (email === emailID));
     if(foundEMail){
         redirectToWebsiteAsRegisteredUser(emailID);
@@ -81,19 +84,12 @@ function checkUserRegisteredOrNot(emailID) {
     }
 }
 
-function setUserDetailsToLocalStorage(userLoginDetails) {
-    let userArray = getUserDetailsFromLocalStorage();
-    userArray.push(userLoginDetails);
-    localStorage.setItem("user_details", JSON.stringify(userArray));
-}
 function getUserDetailsFromLocalStorage() {
-    if (localStorage.getItem("user_details") === null) {
-        let userArr = [];
-        return userArr;
-    } else {
+    if (localStorage.getItem("user_details") !== null || localStorage.getItem("user_details") !== undefined){
         userArr = JSON.parse(localStorage.getItem("user_details"));
         return userArr;
     }
+    return null;
 }
 /**
  * Validate typed email address and password
