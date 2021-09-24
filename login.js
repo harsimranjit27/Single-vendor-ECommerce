@@ -7,7 +7,7 @@
  */
 let loginButton = document.getElementById("login_btn");
 let newSignUp = document.getElementById("create_account");
-
+newSignUp.addEventListener("click",redirectToSignUp);
 loginButton.addEventListener("click", () => {
 
     document.querySelector("#invalid_email_login").style.display = "none";
@@ -82,6 +82,11 @@ function checkUserRegisteredOrNot(emailID) {
     else{
         return false;
     }
+}
+function redirectToSignUp() {
+    document.querySelector(".login_container").style.display = "none";
+    document.querySelector(".signUpContainer").style.display = "inherit";
+    document.querySelector(".admin_container").style.display = "none";
 }
 
 function getUserDetailsFromLocalStorage() {
