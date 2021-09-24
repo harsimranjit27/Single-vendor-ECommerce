@@ -10,7 +10,6 @@ body {
 .login_container {
     background-color: rgb(245, 239, 239);
     padding: 10% 25%;
-    display: none;
 }
 
 .login_box {
@@ -101,14 +100,12 @@ body {
 }
 
 /* SIGN UP SECTION CSS */
-
 .signUpContainer{
     background-color: rgb(245, 239, 239);
-    /* display: none; */
+    display: none;
     width: 50%;
     margin: 10% auto;
 }
-
 .sign_up_box{
     padding: 5% 2%;
     text-align: center;
@@ -173,7 +170,6 @@ body {
     width: 100%;
     margin: 1% 0%;
     color:green;
-    /* font-weight: bolder; */
 }
 .validPass{
     width: 75%;
@@ -192,15 +188,14 @@ body {
 }
 
 /* ADMIN SECTION CSS */
-.admin_container {
+
+.admin_container{
     width: 100vw;
     display: none;
 }
-
 h1 {
     text-align: center;
 }
-
 #product_info {
     width: 55%;
     border: 2px solid lightgray;
@@ -208,7 +203,6 @@ h1 {
     margin: 0% auto;
     padding: 2% 4%;
 }
-
 .product_details {
     margin: 2% 0%;
 }
