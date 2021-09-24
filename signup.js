@@ -14,13 +14,102 @@ let newPassword = document.getElementById("newPassword");
 let reenterPassword = document.getElementById("reenterPassword");
 let registerBtn = document.getElementById("registerBtn");
 
+let newPassValue = newPassword.value;
+
+// When the user clicks on the password field, show the message box
+newPassword.addEventListener("focusin",()=>{
+   document.getElementById("newPassMessage").style.display = "block";
+});
+// When the user clicks outside of the password field, hide the message box
+newPassword.addEventListener("focusout",()=>{
+   document.getElementById("newPassMessage").style.display = "none";
+});
+let letter = document.getElementById("letter");
+let capital = document.getElementById("capital");
+let number = document.getElementById("number");
+let length = document.getElementById("length");
+// Password criteria fulfillment
+newPassword.addEventListener("keyup",()=>{
+    // Validate lowercase letters
+    var lowerCaseLetters = /[a-z]/g;
+    if (newPassword.value.match(lowerCaseLetters)) {
+        letter.classList.remove("invalid");
+        letter.classList.add("valid");
+    } else {
+        letter.classList.remove("valid");
+        letter.classList.add("invalid");
+    }
+
+    // Validate capital letters
+    var upperCaseLetters = /[A-Z]/g;
+    if (newPassword.value.match(upperCaseLetters)) {
+        capital.classList.remove("invalid");
+        capital.classList.add("valid");
+    } else {
+        capital.classList.remove("valid");
+        capital.classList.add("invalid");
+    }
+
+    // Validate numbers
+    var numbers = /[0-9]/g;
+    if (newPassword.value.match(numbers)) {
+        number.classList.remove("invalid");
+        number.classList.add("valid");
+    } else {
+        number.classList.remove("valid");
+        number.classList.add("invalid");
+    }
+
+    // Validate length
+    if (newPassword.value.length >= 8) {
+        length.classList.remove("invalid");
+        length.classList.add("valid");
+    } else {
+        length.classList.remove("valid");
+        length.classList.add("invalid");
+    }
+});
+
+// When the user clicks on the reenter password field, show the message box
+reenterPassword.addEventListener("focusin",()=>{
+    document.getElementById("reenterPassMessage").style.display = "inline";
+ });
+ // When the user clicks outside of the reenter password field, hide the message box
+ reenterPassword.addEventListener("focusout",()=>{
+    document.getElementById("reenterPassMessage").style.display = "none";
+});
+// Matching passwords
+let passwordNotMatched = document.getElementById("passNotMatch");
+let passwordMatched = document.getElementById("passMatch");
+reenterPassword.addEventListener("keyup",()=>{
+    if(reenterPassword.value === newPassword.value){
+        document.getElementById("reenterPassMessage").style.display = "inline";
+        document.getElementById("reenterPassMessage").style.width = "10em";
+        passwordNotMatched.style.display = "none";
+        passwordMatched.style.display = "inline";
+        
+        passwordMatched.classList.add("validPass");
+        passwordNotMatched.classList.remove("invalid");
+    }
+    else{
+        passwordNotMatched.style.display = "inline";
+        passwordMatched.style.display = "none";
+        
+        passwordMatched.classList.remove("validPass");
+        passwordNotMatched.classList.add("invalid");
+        
+        document.getElementById("reenterPassMessage").style.width = "25%";
+    }
+});
+
 registerBtn.addEventListener("click", () => {
-    
+
     document.querySelector("#invalid_email_signup").style.display = "none";
     document.querySelector("#selectUserType_signup").style.display = "none";
-    
+
     let userType = "";
     userType = clickUserType();
+
     function clickUserType() {
         let userType = "";
         if (document.getElementById("type-user").checked) {
@@ -32,12 +121,14 @@ registerBtn.addEventListener("click", () => {
     }
 
     var detailsValid = false;
+
     var validEMail;
-    // Validation
+    // EMail validation
     if (emailAddress.value) {
         validEMail = validateEmail(emailAddress.value);
         console.log(emailAddress.value);
     }
+
     function validateEmail(emailID) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(emailID).toLowerCase());
@@ -59,9 +150,9 @@ registerBtn.addEventListener("click", () => {
                 newPassword: newPassword.value,
                 reenterPassword: reenterPassword.value
             };
-            setDetailsToLocalStorage(user,"user");
+            setDetailsToLocalStorage(user, "user");
             detailsValid = true;
-        } else if(userType === "admin") {
+        } else if (userType === "admin") {
             let admin = {
                 type: "admin",
                 fname: fname.value,
@@ -70,15 +161,14 @@ registerBtn.addEventListener("click", () => {
                 newPassword: newPassword.value,
                 reenterPassword: reenterPassword.value
             };
-            setDetailsToLocalStorage(admin,"admin");
+            setDetailsToLocalStorage(admin, "admin");
             detailsValid = true;
-        }
-        else{
+        } else {
             document.querySelector("#selectUserType_signup").style.display = "inline";
             document.querySelector("#invalid_email_signup").style.display = "none";
         }
     }
-    if(detailsValid){
+    if (detailsValid) {
         fname.value = "";
         lname.value = "";
         emailAddress.value = "";
@@ -86,7 +176,6 @@ registerBtn.addEventListener("click", () => {
         reenterPassword.value = "";
     }
 });
-
 
 function checkUserRegisteredOrNot(emailID) {
     let userArr = getDetailsFromLocalStorage("user");
@@ -96,33 +185,32 @@ function checkUserRegisteredOrNot(emailID) {
     if (foundInUserEMail) {
         redirectToLogin(emailID);
         return true;
-    } 
-    else if (foundInAdminEMail) {
+    } else if (foundInAdminEMail) {
         redirectToLogin(emailID);
         return true;
-    } 
-    else {
+    } else {
         return false;
     }
 }
 
-function setDetailsToLocalStorage(signUpDetails,type) {
+function setDetailsToLocalStorage(signUpDetails, type) {
     if (type === "user") {
         let userArray = getDetailsFromLocalStorage("user");
-        if(userArray === null){
+        if (userArray === null) {
             console.log("userType not passed in getDetailsFromLocalStorage");
         }
         userArray.push(signUpDetails);
         localStorage.setItem("user_details", JSON.stringify(userArray));
-    } else if(type === "admin"){
+    } else if (type === "admin") {
         let adminArray = getDetailsFromLocalStorage("admin");
-        if(adminArray === null){
+        if (adminArray === null) {
             console.log("userType not passed in getDetailsFromLocalStorage");
         }
         adminArray.push(signUpDetails);
         localStorage.setItem("admin_details", JSON.stringify(adminArray));
     }
 }
+
 function getDetailsFromLocalStorage(userType) {
     if (userType === "user") {
         if (localStorage.getItem("user_details") === null) {
@@ -132,8 +220,7 @@ function getDetailsFromLocalStorage(userType) {
             userArr = JSON.parse(localStorage.getItem("user_details"));
             return userArr;
         }
-    }
-    else if(userType === "admin"){
+    } else if (userType === "admin") {
         if (localStorage.getItem("admin_details") === null) {
             let adminArr = [];
             return adminArr;
