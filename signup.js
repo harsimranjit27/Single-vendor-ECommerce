@@ -209,8 +209,9 @@ function checkUserRegisteredOrNot(emailID) {
 }
 
 function redirectToLogin(emailID) {
+    alert("This EMail is registered with us");
     document.querySelector(".signUpContainer").style.display = "none";
-    document.querySelector(".login_container").style.display = "initial";
+    document.querySelector(".login_container").style.display = "inherit";
     document.getElementById("login_email").value = emailID;
 }
 
@@ -252,6 +253,3 @@ function getDetailsFromLocalStorage(userType) {
     }
     return null;
 }
-/**
- * Wrap above details in object and store array in object
- */
