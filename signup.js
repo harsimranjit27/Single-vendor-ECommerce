@@ -17,19 +17,19 @@ let registerBtn = document.getElementById("registerBtn");
 let newPassValue = newPassword.value;
 
 // When the user clicks on the password field, show the message box
-newPassword.addEventListener("focusin",()=>{
-   document.getElementById("newPassMessage").style.display = "block";
+newPassword.addEventListener("focusin", () => {
+    document.getElementById("newPassMessage").style.display = "block";
 });
 // When the user clicks outside of the password field, hide the message box
-newPassword.addEventListener("focusout",()=>{
-   document.getElementById("newPassMessage").style.display = "none";
+newPassword.addEventListener("focusout", () => {
+    document.getElementById("newPassMessage").style.display = "none";
 });
 let letter = document.getElementById("letter");
 let capital = document.getElementById("capital");
 let number = document.getElementById("number");
 let length = document.getElementById("length");
 // Password criteria fulfillment
-newPassword.addEventListener("keyup",()=>{
+newPassword.addEventListener("keyup", () => {
     // Validate lowercase letters
     var lowerCaseLetters = /[a-z]/g;
     if (newPassword.value.match(lowerCaseLetters)) {
@@ -71,36 +71,42 @@ newPassword.addEventListener("keyup",()=>{
 });
 
 // When the user clicks on the reenter password field, show the message box
-reenterPassword.addEventListener("focusin",()=>{
+reenterPassword.addEventListener("focusin", () => {
     document.getElementById("reenterPassMessage").style.display = "inline";
- });
- // When the user clicks outside of the reenter password field, hide the message box
- reenterPassword.addEventListener("focusout",()=>{
+    matchPasswords();
+});
+// Reentering password
+reenterPassword.addEventListener("keyup", () => {
+    matchPasswords();
+});
+// When the user clicks outside of the reenter password field, hide the message box
+reenterPassword.addEventListener("focusout", () => {
     document.getElementById("reenterPassMessage").style.display = "none";
 });
-// Matching passwords
-let passwordNotMatched = document.getElementById("passNotMatch");
-let passwordMatched = document.getElementById("passMatch");
-reenterPassword.addEventListener("keyup",()=>{
-    if(reenterPassword.value === newPassword.value){
+
+function matchPasswords() {
+
+    // Matching passwords
+    let passwordNotMatched = document.getElementById("passNotMatch");
+    let passwordMatched = document.getElementById("passMatch");
+    if (reenterPassword.value === newPassword.value) {
         document.getElementById("reenterPassMessage").style.display = "inline";
         document.getElementById("reenterPassMessage").style.width = "10em";
         passwordNotMatched.style.display = "none";
         passwordMatched.style.display = "inline";
-        
+
         passwordMatched.classList.add("validPass");
         passwordNotMatched.classList.remove("invalid");
-    }
-    else{
+    } else {
         passwordNotMatched.style.display = "inline";
         passwordMatched.style.display = "none";
-        
+
         passwordMatched.classList.remove("validPass");
         passwordNotMatched.classList.add("invalid");
-        
+
         document.getElementById("reenterPassMessage").style.width = "25%";
     }
-});
+}
 
 registerBtn.addEventListener("click", () => {
 
@@ -141,34 +147,43 @@ registerBtn.addEventListener("click", () => {
     }
     // valid email
     else {
-        if (userType === "user") {
-            let user = {
-                type: "user",
-                fname: fname.value,
-                lname: lname.value,
-                emailAddress: emailAddress.value,
-                newPassword: newPassword.value,
-                reenterPassword: reenterPassword.value
-            };
-            setDetailsToLocalStorage(user, "user");
-            detailsValid = true;
-        } else if (userType === "admin") {
-            let admin = {
-                type: "admin",
-                fname: fname.value,
-                lname: lname.value,
-                emailAddress: emailAddress.value,
-                newPassword: newPassword.value,
-                reenterPassword: reenterPassword.value
-            };
-            setDetailsToLocalStorage(admin, "admin");
-            detailsValid = true;
-        } else {
-            document.querySelector("#selectUserType_signup").style.display = "inline";
-            document.querySelector("#invalid_email_signup").style.display = "none";
+        let registered = checkUserRegisteredOrNot(emailAddress.value);
+        if (!registered) {
+            if (userType === "user") {
+                let user = {
+                    type: "user",
+                    fname: fname.value,
+                    lname: lname.value,
+                    emailAddress: emailAddress.value,
+                    newPassword: newPassword.value,
+                    reenterPassword: reenterPassword.value
+                };
+                setDetailsToLocalStorage(user, "user");
+                detailsValid = true;
+            } else if (userType === "admin") {
+                let admin = {
+                    type: "admin",
+                    fname: fname.value,
+                    lname: lname.value,
+                    emailAddress: emailAddress.value,
+                    newPassword: newPassword.value,
+                    reenterPassword: reenterPassword.value
+                };
+                setDetailsToLocalStorage(admin, "admin");
+                detailsValid = true;
+            } else {
+                document.querySelector("#selectUserType_signup").style.display = "inline";
+                document.querySelector("#invalid_email_signup").style.display = "none";
+            }
         }
     }
+    // Emptying entered fields after successful registration
     if (detailsValid) {
+        if (userType === "user") {
+            document.getElementById("type-user").checked = false;
+        } else if (userType === "admin") {
+            document.getElementById("type-admin").checked = false;
+        }
         fname.value = "";
         lname.value = "";
         emailAddress.value = "";
@@ -180,8 +195,8 @@ registerBtn.addEventListener("click", () => {
 function checkUserRegisteredOrNot(emailID) {
     let userArr = getDetailsFromLocalStorage("user");
     let adminArr = getDetailsFromLocalStorage("admin");
-    let foundInUserEMail = userArr.find(email => (email === emailID));
-    let foundInAdminEMail = adminArr.find(email => (email === emailID));
+    let foundInUserEMail = userArr.find(elem => (elem.emailAddress === emailID));
+    let foundInAdminEMail = adminArr.find(elem => (elem.emailAddress === emailID));
     if (foundInUserEMail) {
         redirectToLogin(emailID);
         return true;
@@ -191,6 +206,12 @@ function checkUserRegisteredOrNot(emailID) {
     } else {
         return false;
     }
+}
+
+function redirectToLogin(emailID) {
+    document.querySelector(".signUpContainer").style.display = "none";
+    document.querySelector(".login_container").style.display = "initial";
+    document.getElementById("login_email").value = emailID;
 }
 
 function setDetailsToLocalStorage(signUpDetails, type) {
