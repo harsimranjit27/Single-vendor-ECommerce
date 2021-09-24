@@ -142,6 +142,44 @@ body {
     position: absolute;
     right: 10%;
 }
+#newPassMessage,#reenterPassMessage{
+    display: none;
+    width: 22%;
+    position: absolute;
+    top: 0%;
+    left: 92%;   
+    padding: 0 3% 2%;
+    background-color: rgb(243, 209, 141);
+    border-radius: 5px;
+}
+#newPassMessage:nth-child(n){
+    font-size: 0.7em;
+}
+#reenterPassMessage{
+    width: 25%;
+    padding: 1% 0.35% 1% 1%;
+    font-size: 0.7em;
+    font-weight: bolder;
+}
+#passMatch{
+    display: none;
+}
+.invalid{
+    width: 100%;
+    margin: 1% 0%;
+    color: red;
+}
+.valid{
+    width: 100%;
+    margin: 1% 0%;
+    color:green;
+    /* font-weight: bolder; */
+}
+.validPass{
+    width: 75%;
+    margin: 1% 0%;
+    color:green;   
+}
 #registerBtn{
     border: none;
     background-color: orange;
