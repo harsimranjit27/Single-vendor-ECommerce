@@ -44,7 +44,7 @@ body {
     margin-bottom: 3%;
 }
 
-#notRegisteredMessage {
+#notRegisteredMessage,#enterPassword_login {
     display: none;
     color: red;
     font-weight: bolder;
