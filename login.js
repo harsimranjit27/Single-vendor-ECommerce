@@ -1,6 +1,7 @@
 let loginButton = document.getElementById("login_btn");
 let newSignUp = document.getElementById("create_account");
 newSignUp.addEventListener("click", redirectToSignUp);
+
 loginButton.addEventListener("click", () => {
 
     document.querySelector("#invalid_email_login").style.display = "none";
@@ -44,54 +45,62 @@ loginButton.addEventListener("click", () => {
     }
     // Whether details are entered or not
     if (validEMail && password && userType) {
-        console.log("validEMail : ",validEMail);
-        console.log("password : ",password);
-        console.log("userType : ",userType);
-        console.log("emailID : ",emailID);
         let userLoginDetails = {
             emailID,
             password
         };
-        console.log(userLoginDetails);
-        console.log(userLoginDetails.emailID);
-        let emailToPassAsParameter = userLoginDetails.emailID;
-        let registered = checkUserRegisteredOrNot(emailToPassAsParameter, userType);
-        console.log("type : ",typeof(registered));
-        console.log(registered);
+        let registered = checkUserRegisteredOrNot(emailID, userType);
         if (registered.result == "registered admin") {
-            document.querySelector(".signUpContainer").style.display = "none";
-            document.querySelector(".login_container").style.display = "none";
-            document.querySelector(".admin_container").style.display = "initial";
-            console.log("reg admin");
+            let adminArr = getDetailsFromLocalStorage("admin");
+            let passMatch = matchPasswords(adminArr,emailID,userLoginDetails);
+            if (passMatch) {
+                console.log("Pass match");
+                document.querySelector(".admin_container").style.display = "inherit";
+                document.querySelector(".signUpContainer").style.display = "none";
+                document.querySelector(".login_container").style.display = "none";
+            }
+            else{
+                console.log("Pass not match");
+                document.getElementById("wrongPassword").style.display = "inline";
+            }
         }
         else if (registered.result == "registered user") {
-            document.querySelector(".signUpContainer").style.display = "none";
-            document.querySelector(".login_container").style.display = "none";
-            document.querySelector(".admin_container").style.display = "none";
-            console.log("reg user");
-            redirectToWebsiteAsRegisteredUser(userLoginDetails.emailID, registered);
+            // console.log("registered user");
+            let userArr = getDetailsFromLocalStorage("user");
+            let passMatch = matchPasswords(userArr,emailID,userLoginDetails);
+            if (passMatch) {
+                document.querySelector(".admin_container").style.display = "none";
+                document.querySelector(".signUpContainer").style.display = "none";
+                document.querySelector(".login_container").style.display = "none";
+                console.log("User password match");
+            }
+            else{
+                document.getElementById("wrongPassword").style.display = "inline";
+            }
         }
         else if (registered.result == "not registered user" || registered.result === "not registered admin") {
-            document.getElementById("notRegisteredMessage").style.display = "visible";
-            console.log("nota");
+            console.log("not registered");
+            document.getElementById("notRegisteredMessage").style.display = "inherit";
+            // document.querySelector(".login_container").style.display = "none";
+            // document.querySelector(".signUpContainer").style.display = "inherit";
+            // document.querySelector(".admin_container").style.display = "none";
         }
-        emailID.value = "";
-        password.value = "";
 
         function checkUserRegisteredOrNot(emailID, userType) {
-            console.log("registered user or not");
+            console.log("registered user or not function");
             var obj = {
-                result : ""
+                emailID,
+                result: ""
             };
             if (userType === "user") {
                 let userArr = getDetailsFromLocalStorage("user");
-                console.log(userArr);
+                // console.log(userArr);
                 if (userArr === null || userArr === undefined) {
                     obj.result = "not registered user";
                     return obj;
                 }
                 let foundEMail = userArr.find(elem => (elem.emailAddress === emailID));
-                console.log(foundEMail);
+                // console.log(foundEMail);
                 if (foundEMail) {
                     obj.result = "registered user";
                     return obj;
@@ -118,7 +127,17 @@ loginButton.addEventListener("click", () => {
             }
             return obj;
         }
-
+        function matchPasswords(arr,loginDetails) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].newPassword === loginDetails.password) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        emailID.value = "";
+        password.value = "";
     }
 });
 
@@ -133,6 +152,7 @@ document.getElementById("login_pass").addEventListener("focusin", () => {
     document.getElementById("enterPassword_login").style.display = "none";
     document.getElementById("invalid_email_login").style.display = "none";
     document.getElementById("notRegisteredMessage").style.display = "none";
+    document.getElementById("wrongPassword").style.display = "none";
 });
 document.getElementById("radio_input_user").addEventListener("focusin", () => {
     document.getElementById("selectUserType_login").style.display = "none";
