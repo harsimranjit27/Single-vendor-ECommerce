@@ -12,8 +12,7 @@ var count;
 // console.log(localStorage.getItem("product_info"));
 if (JSON.parse(localStorage.getItem("product_info")) !== undefined || JSON.parse(localStorage.getItem("product_info")) !== null) {
     let arr = JSON.parse(localStorage.getItem("product_info"));
-    if(arr){
-
+    if(arr.length){
         let len = arr.length;
         count = arr[len-1].productID+1;
     }
