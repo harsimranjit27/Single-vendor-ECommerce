@@ -6,10 +6,11 @@ body {
     background-color: rgb(245, 239, 239);
 }
 
-/* Login Form CSS*/
+/*------------------ Login Form CSS -------------------*/
 .login_container {
     background-color: rgb(245, 239, 239);
     padding: 10% 25%;
+    display: none;
 }
 
 .login_box {
@@ -99,7 +100,7 @@ body {
     cursor: pointer;
 }
 
-/* SIGN UP SECTION CSS */
+/*----------------- SIGN UP SECTION CSS ----------------*/
 .signUpContainer{
     background-color: rgb(245, 239, 239);
     display: none;
@@ -192,7 +193,7 @@ body {
     cursor: pointer;
 }
 
-/* ADMIN SECTION CSS */
+/*----------------- ADMIN SECTION CSS -----------------*/
 
 .admin_container{
     width: 100vw;
@@ -363,4 +364,61 @@ span {
     .details :nth-child(n) {
         margin-top: 0%;
     }
+}
+
+/*-------------------- Website CSS --------------------*/
+
+#website_container{
+    background-color: oldlace;
+    margin: 0;
+}
+#websiteHeading{
+    margin-top: 0;
+    padding: 1% 0%;
+    background-color: orange;
+}
+.marqueeText{
+    padding: 1% 0;
+    font-size: 2em;
+    font-weight: bolder;
+}
+.products{
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    margin: 5%;
+    margin-top: 0%;
+}
+.productDivOnWebsite{
+    border: 1px solid black;
+    width: 22.75%;
+    margin: 1%;
+    background-color: rgb(222, 222, 235);
+}
+.imagesOfProductsOnWebsite{
+    width: 90%;
+    height: 40vh;
+    margin: 5%;
+}
+.nameOfProductsOnWebsite{
+    margin: 1% 0;
+    padding: 0% 5%;
+}
+.descriptionOfProductsOnWebsite{
+    margin: 2% 0;
+    padding: 0% 5%;
+}
+.priceOfProductsOnWebsite{
+    margin: 5% 0%;
+    padding: 0% 5%;
+}
+.addToCartBtn{
+    width: 90%;
+    margin: 5% 5%;
+    margin-top: 0%;
+    border: none;
+    border-radius: 4px;
+    background-color:midnightblue;
+    color: white;
+    padding: 3%;
 }
