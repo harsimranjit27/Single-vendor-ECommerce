@@ -44,7 +44,7 @@ body {
     margin-bottom: 3%;
 }
 
-#notRegisteredMessage,#enterPassword_login {
+#notRegisteredMessage,#enterPassword_login,#wrongPassword {
     display: none;
     color: red;
     font-weight: bolder;
@@ -138,6 +138,11 @@ body {
     width: 50%;
     position: absolute;
     right: 10%;
+}
+#enterNameMessage,#enterEmailMessage,#passwordEmpty,#reentryPasswordEmpty{
+    display: none;
+    font-weight: bolder;
+    color: red;
 }
 #newPassMessage,#reenterPassMessage{
     display: none;
