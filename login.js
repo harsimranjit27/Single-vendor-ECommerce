@@ -52,7 +52,7 @@ loginButton.addEventListener("click", () => {
         let registered = checkUserRegisteredOrNot(emailID, userType);
         if (registered.result == "registered admin") {
             let adminArr = getDetailsFromLocalStorage("admin");
-            let passMatch = matchPasswords(adminArr,emailID,userLoginDetails);
+            let passMatch = matchPasswords(adminArr,userLoginDetails);
             if (passMatch) {
                 console.log("Pass match");
                 document.querySelector(".admin_container").style.display = "inherit";
@@ -67,7 +67,7 @@ loginButton.addEventListener("click", () => {
         else if (registered.result == "registered user") {
             // console.log("registered user");
             let userArr = getDetailsFromLocalStorage("user");
-            let passMatch = matchPasswords(userArr,emailID,userLoginDetails);
+            let passMatch = matchPasswords(userArr,userLoginDetails);
             if (passMatch) {
                 document.querySelector(".admin_container").style.display = "none";
                 document.querySelector(".signUpContainer").style.display = "none";
