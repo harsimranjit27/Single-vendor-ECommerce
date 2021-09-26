@@ -1,12 +1,3 @@
-/**
- * #first_name
- * #last_name
- * #emailAddress
- * #newPassword
- * #reenterPassword
- * #registerBtn
- */
-
 let fname = document.getElementById("first_name");
 let lname = document.getElementById("last_name");
 let emailAddress = document.getElementById("emailAddress");
@@ -85,7 +76,6 @@ reenterPassword.addEventListener("focusout", () => {
 });
 
 function matchPasswords() {
-
     // Matching passwords
     let passwordNotMatched = document.getElementById("passNotMatch");
     let passwordMatched = document.getElementById("passMatch");
@@ -126,27 +116,57 @@ registerBtn.addEventListener("click", () => {
         return userType;
     }
 
+    fname.addEventListener("focusin",()=>{
+        document.getElementById("enterNameMessage").style.display = "none";
+    });
+    emailAddress.addEventListener("focusin",()=>{
+        document.getElementById("enterEmailMessage").style.display = "none";
+    });
+    newPassword.addEventListener("focusin",()=>{
+        document.querySelector("#passwordEmpty").style.display = "none";
+    });
+    reenterPassword.addEventListener("focusin",()=>{
+        document.querySelector("#reentryPasswordEmpty").style.display = "none";
+    });
+
     var detailsValid = false;
-
-    var validEMail;
-    // EMail validation
-    if (emailAddress.value) {
-        validEMail = validateEmail(emailAddress.value);
-        console.log(emailAddress.value);
+    
+    if (fname.value === "") {
+        document.getElementById("enterNameMessage").style.display = "inherit";     
+    }   
+    else if(emailAddress.value === ""){
+        document.getElementById("enterNameMessage").style.display = "none";
+        document.getElementById("enterEmailMessage").style.display = "inherit";
     }
-
-    function validateEmail(emailID) {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(emailID).toLowerCase());
+    else if(newPassword.value === ""){
+        document.getElementById("enterNameMessage").style.display = "none";
+        document.getElementById("enterEmailMessage").style.display = "none";
+        document.querySelector("#passwordEmpty").style.display = "inherit";
     }
-
-    if (!validEMail) {
-        document.querySelector("#invalid_email_signup").style.display = "initial";
-        document.querySelector("#selectUserType_signup").style.display = "none";
-        console.log("invalid email");
+    else if(reenterPassword.value === ""){
+        document.getElementById("enterName").style.display = "none";
+        document.getElementById("enterEmailMessage").style.display = "none";
+        document.querySelector("#passwordEmpty").style.display = "none";
+        document.querySelector("#reentryPasswordEmpty").style.display = "inherit";
     }
-    // valid email
     else {
+        var validEMail;
+        // EMail validation
+        if (emailAddress.value) {
+            validEMail = validateEmail(emailAddress.value);
+            // console.log(emailAddress.value);
+        }
+        function validateEmail(emailID) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(emailID).toLowerCase());
+        }
+        
+        if (!validEMail) {
+            document.querySelector("#invalid_email_signup").style.display = "initial";
+            document.querySelector("#selectUserType_signup").style.display = "none";
+            console.log("invalid email");
+        }
+
         let registered = checkUserRegisteredOrNot(emailAddress.value);
         if (!registered) {
             if (userType === "user") {
@@ -189,6 +209,9 @@ registerBtn.addEventListener("click", () => {
         emailAddress.value = "";
         newPassword.value = "";
         reenterPassword.value = "";
+        document.querySelector(".signUpContainer").style.display = "none";
+        document.querySelector(".admin_container").style.display = "none";
+        document.querySelector(".login_container").style.display = "inherit";
     }
 });
 
@@ -209,7 +232,7 @@ function checkUserRegisteredOrNot(emailID) {
 }
 
 function redirectToLogin(emailID) {
-    alert("This EMail is registered with us");
+    // alert("This EMail is registered with us");
     document.querySelector(".signUpContainer").style.display = "none";
     document.querySelector(".login_container").style.display = "inherit";
     document.getElementById("login_email").value = emailID;
