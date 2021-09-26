@@ -7,17 +7,22 @@ let productImage = document.getElementById("choose_file");
 
 let addProductButton = document.getElementById("add_product");
 let productCatalogueContainer = document.getElementById("product_catalogue_container");
+var count;
 
 // console.log(localStorage.getItem("product_info"));
 if (JSON.parse(localStorage.getItem("product_info")) !== undefined || JSON.parse(localStorage.getItem("product_info")) !== null) {
     let arr = JSON.parse(localStorage.getItem("product_info"));
     if(arr){
+
         let len = arr.length;
-        var count = arr[len-1].productID+1;
+        count = arr[len-1].productID+1;
+    }
+    else{
+        count = 0;
     }
 }
-else{
-   var count = 0; 
+else {
+   count = 0; 
 }
 
 var imageDataURL;
@@ -34,7 +39,7 @@ function changeFileNameToString(){
 addProductButton.addEventListener("click",()=>{
     
     // let imageDataURL = changeFileNameToString();
-    console.log(imageDataURL);
+    // console.log(imageDataURL);
     let product = {
         productName : productNameNode.value,
         productDescription : productDescriptionNode.value,
@@ -65,12 +70,8 @@ function addProductToUI(product) {
 
     let productCatalogue = document.createElement("div");
     productCatalogue.classList.add("product_catalogue");
-    // if(arr.length != null){
-    //     productCatalogue.id = arr[arr.length-1].productID + 1;
-    // }
-    // else{
-        productCatalogue.id = product.productID;
-    // }
+    productCatalogue.id = product.productID;
+
     // image
     var img = document.createElement("img");
     img.classList.add("product_images");
