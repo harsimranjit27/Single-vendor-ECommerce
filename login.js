@@ -72,6 +72,7 @@ loginButton.addEventListener("click", () => {
                 document.querySelector(".admin_container").style.display = "none";
                 document.querySelector(".signUpContainer").style.display = "none";
                 document.querySelector(".login_container").style.display = "none";
+                document.querySelector("#website_container").style.display = "inherit";
                 console.log("User password match");
             }
             else{
@@ -80,6 +81,7 @@ loginButton.addEventListener("click", () => {
         }
         else if (registered.result == "not registered user" || registered.result === "not registered admin") {
             console.log("not registered");
+            password.value = "";
             document.getElementById("notRegisteredMessage").style.display = "inherit";
             // document.querySelector(".login_container").style.display = "none";
             // document.querySelector(".signUpContainer").style.display = "inherit";
