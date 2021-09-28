@@ -10,7 +10,7 @@ body {
 .login_container {
     background-color: rgb(245, 239, 239);
     padding: 10% 25%;
-    display: none;
+    /* display: none; */
 }
 
 .login_box {
@@ -371,11 +371,25 @@ span {
 #website_container{
     background-color: oldlace;
     margin: 0;
+    display: none;
 }
 #websiteHeading{
     margin-top: 0;
     padding: 1% 0%;
-    background-color: orange;
+    background-color: rgb(252, 194, 86);
+    color: rgb(209, 0, 0);
+}
+#cartBtn{
+    position: absolute;
+    top: 3%;
+    right: 5%;
+    padding: 0.5% 2%;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    background-color:midnightblue;
+    cursor: pointer;
 }
 .marqueeText{
     padding: 1% 0;
@@ -421,4 +435,5 @@ span {
     background-color:midnightblue;
     color: white;
     padding: 3%;
+    cursor: pointer;
 }
