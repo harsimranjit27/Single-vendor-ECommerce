@@ -3,6 +3,7 @@
  * add them to website from localStorage
  */
 let productsToDisplayDiv = document.querySelector(".products");
+let cartBtn = document.getElementById("cartBtn");
 
 function getLocalStorage() {
     if (localStorage.getItem("product_info") === null) {
@@ -78,4 +79,13 @@ if (productsArr.length === 0) {
 
         productsToDisplayDiv.appendChild(productDiv);
     });
+}
+
+cartBtn.addEventListener("click",redirectToLogin);
+function redirectToLogin() {
+    document.querySelector("#website_container").style.display = "none";
+    document.querySelector(".signUpContainer").style.display = "none";
+    document.querySelector(".admin_container").style.display = "none";
+    document.querySelector(".login_container").style.display = "inherit";
+    
 }
