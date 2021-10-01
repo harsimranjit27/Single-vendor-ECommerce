@@ -176,7 +176,8 @@ registerBtn.addEventListener("click", () => {
                     lname: lname.value,
                     emailAddress: emailAddress.value,
                     newPassword: newPassword.value,
-                    reenterPassword: reenterPassword.value
+                    reenterPassword: reenterPassword.value,
+                    cart : []
                 };
                 setDetailsToLocalStorage(user, "user");
                 detailsValid = true;
