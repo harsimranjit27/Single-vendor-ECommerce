@@ -88,13 +88,13 @@ if (productsArr.length === 0) {
         // console.log(addToCartBtn);
         let userArr = JSON.parse(localStorage.getItem("user_details"));
         let loggedInEMail = localStorage.getItem("loggedInEMail");
-        
+
         addToCartBtn.forEach(element => {
             element.addEventListener("click", () => {
                 element.innerText = "Added !!";
                 userArr.forEach(user => {
                     if (user.emailAddress === loggedInEMail.replace(/['"]+/g, '')) {
-                        
+
                         let products = JSON.parse(localStorage.getItem("product_info"));
                         let name = element.parentNode.childNodes[1].innerText;
                         let price = element.parentNode.childNodes[3].innerText;
@@ -107,7 +107,7 @@ if (productsArr.length === 0) {
                         console.log(details);
                         user.cart.push(details);
                         // console.log(user.cart);
-                        localStorage.setItem("user_details",JSON.stringify(userArr));
+                        localStorage.setItem("user_details", JSON.stringify(userArr));
                     }
                 });
             });
@@ -117,9 +117,10 @@ if (productsArr.length === 0) {
 }
 
 goToCartBtn.addEventListener("click", checkLoggedIn);
+
 function checkLoggedIn() {
     let loggedInEMail = localStorage.getItem("loggedInEMail");
-    
+
     let users = JSON.parse(localStorage.getItem("user_details"));
     let currUser = users.find(e => e.emailAddress === loggedInEMail.replace(/['"]+/g, ''));
 
@@ -135,15 +136,16 @@ function checkLoggedIn() {
 
     // logged in
     if (currUser.cart.length) {
+
         document.querySelector("#website_container").style.display = "none";
         document.querySelector(".signUpContainer").style.display = "none";
         document.querySelector(".admin_container").style.display = "none";
         document.querySelector(".login_container").style.display = "none";
         document.querySelector(".cart_container").style.display = "inherit";
         document.querySelector("#noItems").style.display = "none";
-        
+
         let returnBtn = document.querySelector("#backToHome");
-        returnBtn.addEventListener("click",()=>{
+        returnBtn.addEventListener("click", () => {
             document.querySelector("#website_container").style.display = "initial";
             document.querySelector(".cart_container").style.display = "none";
         });
@@ -153,21 +155,16 @@ function checkLoggedIn() {
             let cartProduct = document.createElement("div");
             cartProduct.classList.add("cartProduct");
 
-            console.log(currUser.cart[i]);
-            console.log(currUser.cart[i].img);
-            console.log(currUser.cart[i].name);
-            console.log(currUser.cart[i].price);
-
             let image = document.createElement("img");
             image.classList.add("productImageInCart");
-            image.setAttribute("src",currUser.cart[i].img);
+            image.setAttribute("src", currUser.cart[i].img);
             cartProduct.appendChild(image);
 
             let name = document.createElement("h2");
             name.classList.add("nameOfProductInCart");
             name.innerText = currUser.cart[i].name;
             cartProduct.appendChild(name);
-            
+
             let price = document.createElement("p");
             price.classList.add("priceOfProductInCart");
             price.innerText = currUser.cart[i].price;
@@ -179,18 +176,48 @@ function checkLoggedIn() {
             // cartProduct.appendChild(description);
 
             let quantity = document.createElement("div");
-            let plusBtn = document.createElement("button");
+            var plusBtn = document.createElement("button");
             plusBtn.classList.add("inc_dec_btn");
             plusBtn.innerText = "+";
             quantity.appendChild(plusBtn);
-            let minusBtn = document.createElement("button");
+            var minusBtn = document.createElement("button");
             minusBtn.classList.add("inc_dec_btn");
-            minusBtn.innerText = "-";
+            minusBtn.innerText = "−";
             quantity.appendChild(minusBtn);
+
+            let count = 1;
+            var countDisplay = document.createElement("span");
+            countDisplay.classList.add("countOfItem");
+            countDisplay.innerText = count;
+            plusBtn.addEventListener("click", (event) => {
+                count++;
+                event.target.parentNode.childNodes[2].innerText = count;
+            });
+            minusBtn.addEventListener("click", (event) => {
+                count--;
+                if (count === 0) {
+                    let userArr = JSON.parse(localStorage.getItem("user_details"));
+
+                    let cart = userArr.find(e => e.emailAddress === loggedInEMail.replace(/['"]+/g, '')).cart;
+                    let name = cart.find(e => e.name === event.target.parentNode.parentNode.childNodes[1].innerText);
+                    cart.splice(cart.indexOf(name), 1);
+                    localStorage.setItem("user_details", JSON.stringify(userArr));
+                    console.log(userArr);
+
+                    document.querySelector(".allProductsInCart").removeChild(event.target.parentNode.parentNode);
+                }
+                if (count > 1) {
+                    event.target.parentNode.childNodes[2].innerText = count;
+                }
+
+            });
+            quantity.appendChild(countDisplay);
             cartProduct.appendChild(quantity);
+            console.log(cartProduct);
 
             document.querySelector(".allProductsInCart").appendChild(cartProduct);
         }
+
     }
 }
 
@@ -198,7 +225,7 @@ if (localStorage.getItem("loggedInEMail") !== null && localStorage.getItem("logg
     let loggedInUser = JSON.parse(localStorage.getItem("user_details")).find(e => e.emailAddress === localStorage.getItem("loggedInEMail").replace(/['"]+/g, ''));
     loginBtn.innerText = loggedInUser.fname;
 }
-loginBtn.addEventListener("click",()=>{
+loginBtn.addEventListener("click", () => {
     if (localStorage.getItem("loggedInEMail") === "" || localStorage.getItem("loggedInEMail") === null || localStorage.getItem("loggedInEMail") === undefined) {
         document.querySelector(".login_container").style.display = "inherit";
         document.querySelector("#website_container").style.display = "none";
