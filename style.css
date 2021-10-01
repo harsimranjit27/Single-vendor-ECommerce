@@ -469,3 +469,17 @@ span {
     padding: 3%;
     cursor: pointer;
 }
+
+.inc_dec_btn{
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    margin: 0 1% 8% 5%;
+    padding: 2% 8%;
+    font-weight: bolder;
+}
+.countOfItem{
+    margin: 0 10%;
+    font-size: 1.25em;
+}
