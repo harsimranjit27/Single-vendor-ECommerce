@@ -194,15 +194,12 @@ function checkLoggedIn() {
     }
 }
 
-if (localStorage.getItem("loggedInEMail") === "" || localStorage.getItem("loggedInEMail") === null || localStorage.getItem("loggedInEMail") === undefined) {
-    loginBtn.style.right = "2.75%";
-}
-if (localStorage.getItem("loggedInEMail") !== "") {
+if (localStorage.getItem("loggedInEMail") !== null && localStorage.getItem("loggedInEMail") !== undefined && localStorage.getItem("loggedInEMail") !== "") {
     let loggedInUser = JSON.parse(localStorage.getItem("user_details")).find(e => e.emailAddress === localStorage.getItem("loggedInEMail").replace(/['"]+/g, ''));
     loginBtn.innerText = loggedInUser.fname;
 }
 loginBtn.addEventListener("click",()=>{
-    if (localStorage.getItem("loggedInEMail") === "") {
+    if (localStorage.getItem("loggedInEMail") === "" || localStorage.getItem("loggedInEMail") === null || localStorage.getItem("loggedInEMail") === undefined) {
         document.querySelector(".login_container").style.display = "inherit";
         document.querySelector("#website_container").style.display = "none";
         document.querySelector(".signUpContainer").style.display = "none";
