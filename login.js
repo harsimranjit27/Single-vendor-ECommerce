@@ -1,4 +1,5 @@
 let loginButton = document.getElementById("login_btn");
+let loggedInEMail = localStorage.getItem("loggedInEmail");
 let newSignUp = document.getElementById("create_account");
 newSignUp.addEventListener("click", redirectToSignUp);
 
@@ -49,12 +50,15 @@ loginButton.addEventListener("click", () => {
             emailID,
             password
         };
-        let registered = checkUserRegisteredOrNot(emailID, userType);
+        let registered = checkUserRegisteredOrNot(userLoginDetails.emailID, userType);
         if (registered.result == "registered admin") {
             let adminArr = getDetailsFromLocalStorage("admin");
             let passMatch = matchPasswords(adminArr,userLoginDetails);
             if (passMatch) {
                 console.log("Pass match");
+                // logged in admin
+                loggedInEMail = userLoginDetails.emailID;
+                localStorage.setItem("loggedInEMail",JSON.stringify(userLoginDetails.emailID));
                 document.querySelector(".admin_container").style.display = "inherit";
                 document.querySelector(".signUpContainer").style.display = "none";
                 document.querySelector(".login_container").style.display = "none";
@@ -69,6 +73,9 @@ loginButton.addEventListener("click", () => {
             let userArr = getDetailsFromLocalStorage("user");
             let passMatch = matchPasswords(userArr,userLoginDetails);
             if (passMatch) {
+                // user logged in
+                loggedInEMail = userLoginDetails.emailID;
+                localStorage.setItem("loggedInEMail",JSON.stringify(userLoginDetails.emailID));
                 document.querySelector(".admin_container").style.display = "none";
                 document.querySelector(".signUpContainer").style.display = "none";
                 document.querySelector(".login_container").style.display = "none";
