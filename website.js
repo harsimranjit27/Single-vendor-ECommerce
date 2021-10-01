@@ -3,6 +3,7 @@
  * add them to website from localStorage
  */
 let productsToDisplayDiv = document.querySelector(".products");
+let loginBtn = document.querySelector("#userName");
 let goToCartBtn = document.getElementById("cartBtn");
 let productsAddedToWebsite = false;
 
@@ -116,7 +117,6 @@ if (productsArr.length === 0) {
 }
 
 goToCartBtn.addEventListener("click", checkLoggedIn);
-
 function checkLoggedIn() {
     let loggedInEMail = localStorage.getItem("loggedInEMail");
     
@@ -193,3 +193,20 @@ function checkLoggedIn() {
         }
     }
 }
+
+if (localStorage.getItem("loggedInEMail") === "") {
+    loginBtn.style.right = "2.75%";
+}
+if (localStorage.getItem("loggedInEMail") !== "") {
+    let loggedInUser = JSON.parse(localStorage.getItem("user_details")).find(e => e.emailAddress === localStorage.getItem("loggedInEMail").replace(/['"]+/g, ''));
+    loginBtn.innerText = loggedInUser.fname;
+}
+loginBtn.addEventListener("click",()=>{
+    if (localStorage.getItem("loggedInEMail") === "") {
+        document.querySelector(".login_container").style.display = "inherit";
+        document.querySelector("#website_container").style.display = "none";
+        document.querySelector(".signUpContainer").style.display = "none";
+        document.querySelector(".admin_container").style.display = "none";
+        document.querySelector(".cart_container").style.display = "none";
+    }
+});
