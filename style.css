@@ -10,7 +10,7 @@ body {
 .login_container {
     background-color: rgb(245, 239, 239);
     padding: 10% 25%;
-    /* display: none; */
+    display: none;
 }
 
 .login_box {
@@ -371,7 +371,7 @@ span {
 #website_container{
     background-color: oldlace;
     margin: 0;
-    display: none;
+    /* display: none; */
 }
 #websiteHeading{
     margin-top: 0;
@@ -395,26 +395,28 @@ span {
     padding: 1% 0;
     font-size: 2em;
     font-weight: bolder;
+    direction: rtl;
 }
-.products{
+.products,.allProductsInCart{
     display: flex;
-    width: 90%;
+    width: 100%;
     flex-wrap: wrap;
-    margin: 5%;
+    margin: 1%;
     margin-top: 0%;
+    justify-content: space-evenly;
 }
 .productDivOnWebsite{
     border: 1px solid black;
-    width: 22.75%;
-    margin: 1%;
+    width: 23%;
+    margin : 0 1% 1% 0;
     background-color: rgb(222, 222, 235);
 }
-.imagesOfProductsOnWebsite{
+.imagesOfProductsOnWebsite,.productImageInCart{
     width: 90%;
-    height: 40vh;
+    height: 13em;
     margin: 5%;
 }
-.nameOfProductsOnWebsite{
+.nameOfProductsOnWebsite,.nameOfProductInCart{
     margin: 1% 0;
     padding: 0% 5%;
 }
@@ -422,7 +424,7 @@ span {
     margin: 2% 0;
     padding: 0% 5%;
 }
-.priceOfProductsOnWebsite{
+.priceOfProductsOnWebsite,.priceOfProductInCart{
     margin: 5% 0%;
     padding: 0% 5%;
 }
