@@ -98,7 +98,7 @@ function matchPasswords() {
     }
 }
 
-registerBtn.addEventListener("click", () => {
+registerBtn.addEventListener("click", (event) => {
 
     document.querySelector("#invalid_email_signup").style.display = "none";
     document.querySelector("#selectUserType_signup").style.display = "none";
@@ -116,85 +116,83 @@ registerBtn.addEventListener("click", () => {
         return userType;
     }
 
-    fname.addEventListener("focusin",()=>{
+    fname.addEventListener("focusin", () => {
         document.getElementById("enterNameMessage").style.display = "none";
     });
-    emailAddress.addEventListener("focusin",()=>{
+    emailAddress.addEventListener("focusin", () => {
         document.getElementById("enterEmailMessage").style.display = "none";
     });
-    newPassword.addEventListener("focusin",()=>{
+    newPassword.addEventListener("focusin", () => {
         document.querySelector("#passwordEmpty").style.display = "none";
     });
-    reenterPassword.addEventListener("focusin",()=>{
+    reenterPassword.addEventListener("focusin", () => {
         document.querySelector("#reentryPasswordEmpty").style.display = "none";
     });
 
     var detailsValid = false;
-    
+
     if (fname.value === "") {
-        document.getElementById("enterNameMessage").style.display = "inherit";     
-    }   
-    else if(emailAddress.value === ""){
+        document.getElementById("enterNameMessage").style.display = "inherit";
+    } else if (emailAddress.value === "") {
         document.getElementById("enterNameMessage").style.display = "none";
         document.getElementById("enterEmailMessage").style.display = "inherit";
-    }
-    else if(newPassword.value === ""){
+    } else if (newPassword.value === "") {
         document.getElementById("enterNameMessage").style.display = "none";
         document.getElementById("enterEmailMessage").style.display = "none";
         document.querySelector("#passwordEmpty").style.display = "inherit";
-    }
-    else if(reenterPassword.value === ""){
+    } else if (reenterPassword.value === "") {
         document.getElementById("enterName").style.display = "none";
         document.getElementById("enterEmailMessage").style.display = "none";
         document.querySelector("#passwordEmpty").style.display = "none";
         document.querySelector("#reentryPasswordEmpty").style.display = "inherit";
-    }
-    else {
+    } else {
         var validEMail;
         // EMail validation
         if (emailAddress.value) {
             validEMail = validateEmail(emailAddress.value);
             // console.log(emailAddress.value);
         }
+
         function validateEmail(emailID) {
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(String(emailID).toLowerCase());
         }
-        
+
         if (!validEMail) {
             document.querySelector("#invalid_email_signup").style.display = "initial";
             document.querySelector("#selectUserType_signup").style.display = "none";
             console.log("invalid email");
         }
-
-        let registered = checkUserRegisteredOrNot(emailAddress.value);
-        if (!registered) {
-            if (userType === "user") {
-                let user = {
-                    type: "user",
-                    fname: fname.value,
-                    lname: lname.value,
-                    emailAddress: emailAddress.value,
-                    newPassword: newPassword.value,
-                    reenterPassword: reenterPassword.value,
-                    cart : []
-                };
-                setDetailsToLocalStorage(user, "user");
-                detailsValid = true;
-            } else if (userType === "admin") {
-                let admin = {
-                    type: "admin",
-                    fname: fname.value,
-                    lname: lname.value,
-                    emailAddress: emailAddress.value,
-                    newPassword: newPassword.value,
-                    reenterPassword: reenterPassword.value
-                };
-                setDetailsToLocalStorage(admin, "admin");
-                detailsValid = true;
-            } else {
-                document.querySelector("#selectUserType_signup").style.display = "inline";
-                document.querySelector("#invalid_email_signup").style.display = "none";
+        if (validEMail) {
+            let registered = checkUserRegisteredOrNot(emailAddress.value);
+            if (!registered) {
+                if (userType === "user") {
+                    let user = {
+                        type: "user",
+                        fname: fname.value,
+                        lname: lname.value,
+                        emailAddress: emailAddress.value,
+                        newPassword: newPassword.value,
+                        reenterPassword: reenterPassword.value,
+                        cart: []
+                    };
+                    setDetailsToLocalStorage(user, "user");
+                    detailsValid = true;
+                } else if (userType === "admin") {
+                    let admin = {
+                        type: "admin",
+                        fname: fname.value,
+                        lname: lname.value,
+                        emailAddress: emailAddress.value,
+                        newPassword: newPassword.value,
+                        reenterPassword: reenterPassword.value
+                    };
+                    setDetailsToLocalStorage(admin, "admin");
+                    detailsValid = true;
+                } else {
+                    document.querySelector("#selectUserType_signup").style.display = "inline";
+                    document.querySelector("#invalid_email_signup").style.display = "none";
+                }
             }
         }
     }
